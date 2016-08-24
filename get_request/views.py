@@ -10,12 +10,14 @@ import urllib.request as my_request
 
 from get_request.status_codes import check_status
 
+# General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
 @payment.required(0)
 def info(request):
+    get_info_border = '-------------------------------------------------------------------------------------------'
     get_status_info = '\nCheck the HTTP status: 21 buy http://www.request402.org/get_status?url=example.com\n'
-    get_ip_info = 'Check the IP address of a website: 21 buy http://www.request402.org/get_ip?url=example.com\n'
-    return HttpResponse("You can easily use request402 by running any of the following commands:\n %s%s" % (get_status_info, get_ip_info), status=200)
+    get_ip_info = 'Check the IP address of a website: 21 buy http://www.request402.org/get_ip?url=example.com'
+    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s\n%s\n" % (get_info_border, get_status_info, get_ip_info, get_info_border), status=200)
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
@@ -23,7 +25,8 @@ def info(request):
 def get_status(request):
 
     """
-    Function calls a website url and returns json output of headers and status code
+    Function calls a website url and returns json output of headers and status code.
+
     Input: => https://www.request402.org/get_status?url=example.com
     Output: => JSON {status, headers}
     """
@@ -49,7 +52,7 @@ def get_status(request):
 @api_view(['GET'])
 @payment.required(10)
 def get_ip(request):
-    
+    # Add function description comment code.    
     url = request.GET.get('url')
     
     try:
