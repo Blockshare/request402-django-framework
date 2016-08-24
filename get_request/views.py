@@ -54,7 +54,7 @@ def get_ip(request):
     
     try:
         response = socket.gethostbyname(url)
-        message = {'ip_address': response, 'url': url}
+        message = {'origin': response, 'url': url}
         data = json.dumps(message, indent=2)
         return HttpResponse(data, status=200)
     except:
