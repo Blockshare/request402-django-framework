@@ -12,8 +12,9 @@ Request the IP address, Headers, and Status Code of any website.
 
 How to use:
 
-    $ 21 buy https://www.request402.org/get_status?url=www.example.com -> Status and headers
+    $ 21 buy https://www.request402.org/get_status?url=www.example.com -> Status and Headers
     $ 21 buy https://www.request402.org/get_ip?url=www.example.com --> IP Address
+    $ 21 buy https://www.request402.org/ip --> User IP Address
 
 
 <p>Here is an example of the JSON response when running /get_status?url=www.example.com for Google</p>
@@ -58,7 +59,13 @@ How to use:
 </code></pre>
 <p>This is an example of runnng /get_ip?url=www.example.com for Google.</p>
 <pre><code>{
-    "ip_address": "216.58.219.164",
+    "origin": "216.58.219.164",
     "url": "www.google.com"
+}
+</code></pre>
+
+<p>This is an example of running /ip </p>
+<pre><code>{
+    "origin": 172.217.4.78
 }
 </code></pre>
