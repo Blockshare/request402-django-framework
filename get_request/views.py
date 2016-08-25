@@ -15,9 +15,10 @@ from get_request.status_codes import check_status
 @payment.required(0)
 def info(request):
     get_info_border = '-------------------------------------------------------------------------------------------'
-    get_status_info = '\nCheck the HTTP status: 21 buy http://www.request402.org/get_status?url=example.com\n'
-    get_ip_info = 'Check the IP address of a website: 21 buy http://www.request402.org/get_ip?url=example.com'
-    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s\n%s\n" % (get_info_border, get_status_info, get_ip_info, get_info_border), status=200)
+    get_status_info = '\nReturns a websites HTTP status: 21 buy http://www.request402.org/get_status?url=example.com\n'
+    get_ip_info = 'Returns a websites IP: 21 buy http://www.request402.org/get_ip?url=example.com\n'
+    get_ip = 'Returns origin IP: 21 buy http://www.request402.org/ip'
+    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s\n" % (get_info_border, get_status_info, get_ip_info, get_ip, get_info_border), status=200)
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
