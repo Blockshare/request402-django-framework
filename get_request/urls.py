@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^info$', get_request.views.info),
     url(r'^get_status$', get_request.views.get_status),
     url(r'^get_ip$', get_request.views.get_ip),
-    url(r'^get_client_ip$', get_request.views.get_client_ip),
+    url(r'^ip$', get_request.views.ip),
 ]

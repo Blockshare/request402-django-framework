@@ -64,15 +64,10 @@ def get_ip(request):
         exception = {"Excpetion raised" : "Possible %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
 
-###
-#
-# HttpRequest.META code test
-#
-###
-
+# Get the IP address of user. Output in JSON
 @api_view(['GET'])
 @payment.required(10)
-def get_client_ip(request):
+def ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
