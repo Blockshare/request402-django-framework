@@ -8,8 +8,6 @@ import json
 import urllib.request as my_request
 
 
-from get_request.status_codes import check_status
-
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
 @payment.required(0)
@@ -39,10 +37,8 @@ def get_status(request):
     # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
-        status = response.getcode()
-        description = check_status(status)
         headers = response.getheaders()[0:8]
-        message = {status : description, 'Headers': {headers[0][0]: headers[0][1], \
+        message = {'Status': {response.status : response.reason}, 'Headers': {headers[0][0]: headers[0][1], \
                    headers[1][0]: headers[1][1], headers[2][0]: headers[2][1], \
                    headers[3][0]: headers[3][1], headers[4][0]: headers[4][1], \
                    headers[5][0]: headers[5][1]}}
@@ -85,7 +81,7 @@ def ip(request):
 
 
 # Returns the GET Header data. Output is JSON
-# Will work on this for deployment once the application is deployed.
+# Will work on this once the application is deployed to production.
 @api_view(['GET'])
 @payment.required(10)
 def get(request):
