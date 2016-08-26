@@ -98,8 +98,7 @@ def get(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
 
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
+    if http_accept:
         accept = http_accept.split(',')[0]
         encoding = http_accept_encoding.split(',')[0]
         content = content_type.split(',')[0]
@@ -110,7 +109,7 @@ def get(request):
         remote_host = http_remote_host.split(',')[0]
         message = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent,\
                    'Content-Type': content, 'Content-Length': length, 'Server-Name': server,\
-                   'Host': host, 'Remote-Host': remote_host},'Origin': ip}
+                   'Host': host, 'Remote-Host': remote_host}}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     else:
         return HttpResponse('NOPE', status=200)
