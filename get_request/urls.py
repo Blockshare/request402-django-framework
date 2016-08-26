@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^get_status$', get_request.views.get_status),
     url(r'^get_ip$', get_request.views.get_ip),
     url(r'^ip$', get_request.views.ip),
+    url(r'^get$', get_request.views.get),
 ]

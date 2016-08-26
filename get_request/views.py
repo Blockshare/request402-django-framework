@@ -42,7 +42,7 @@ def get_status(request):
         status = response.getcode()
         description = check_status(status)
         headers = response.getheaders()[0:8]
-        message = {status : description, 'headers': headers}
+        message = {status : description, 'Headers': headers}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
         exception = {"Exception raised" : "Possibly %s doesn't exist" % (url)}
@@ -58,7 +58,7 @@ def get_ip(request):
     
     try:
         response = socket.gethostbyname(url)
-        message = {'origin': response, 'url': url}
+        message = {'Origin': response, 'Url': url}
         data = json.dumps(message, indent=2)
         return HttpResponse(data, status=200)
     except:
@@ -69,12 +69,49 @@ def get_ip(request):
 @api_view(['GET'])
 @payment.required(10)
 def ip(request):
+    # Add Comment code for input and Output
+    # Change from "if-else" conditional to "try-except".
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
-        message = {'origin': ip}
+        message = {'Origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     else:
         ip = request.META.get('REMOTE_ADDR')
-        message = {'origin': ip}
+        message = {'Origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
+
+
+# Returns the GET Header data. Output is JSON
+@api_view(['GET'])
+@payment.required(10)
+def get(request):
+
+    http_accept = request.META.get('HTTP_ACCEPT')
+    http_accept_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
+    http_user_agent = request.META.get('HTTP_USER_AGENT')
+    content_length = request.META.get('CONTENT_LENGTH')
+    content_type = request.META.get('CONTENT_TYPE')
+    server_name = request.META.get('SERVER_NAME')
+    http_host = request.META.get('HTTP_HOST')
+    http_remote_host = request.META.get('REMOTE_HOST')
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+        accept = http_accept.split(',')[0]
+        encoding = http_accept_encoding.split(',')[0]
+        content = content_type.split(',')[0]
+        length = content_length.split(',')[0]
+        agent = http_user_agent.split(',')[0]
+        server = server_name.split(',')[0]
+        host = http_host.split(',')[0]
+        remote_host = http_remote_host.split(',')[0]
+        message = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent,\
+                   'Content-Type': content, 'Content-Length': length, 'Server-Name': server,\
+                   'Host': host, 'Remote-Host': remote_host},'Origin': ip}
+        return HttpResponse(json.dumps(message, indent=2), status=200)
+    else:
+        return HttpResponse('NOPE', status=200)
+
