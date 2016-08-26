@@ -33,7 +33,7 @@ def get_status(request):
     """
     
     # Get the website url and assign it to variable url. 
-    website_url = request.GET.get('url')
+    website_url = request.GET.get('uri')
     url = 'http://'+website_url
 
     # Open url, get the status code and headers and assign each to json output.
@@ -42,19 +42,21 @@ def get_status(request):
         status = response.getcode()
         description = check_status(status)
         headers = response.getheaders()[0:8]
-        message = {status : description, 'Headers': headers}
+        message = {status : description, 'Headers': {headers[0][0]: headers[0][1], \
+                   headers[1][0]: headers[1][1], headers[2][0]: headers[2][1], \
+                   headers[3][0]: headers[3][1], headers[4][0]: headers[4][1], \
+                   headers[5][0]: headers[5][1]}}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
         exception = {"Exception raised" : "Possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
-
 
 # Get the IP address of a website. Output in JSON
 @api_view(['GET'])
 @payment.required(10)
 def get_ip(request):
     # Add function description comment code.    
-    url = request.GET.get('url')
+    url = request.GET.get('uri')
     
     try:
         response = socket.gethostbyname(url)
