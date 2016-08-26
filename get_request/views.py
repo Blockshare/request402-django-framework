@@ -107,9 +107,10 @@ def get(request):
         server = server_name.split(',')[0]
         host = http_host.split(',')[0]
         remote_host = http_remote_host.split(',')[0]
-        message = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent,\
-                   'Content-Type': content, 'Content-Length': length, 'Server-Name': server,\
-                   'Host': host, 'Remote-Host': remote_host}}
+        message = {'Headers': {'Accept': accept}}
+        #message = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent,\
+                   #'Content-Type': content, 'Content-Length': length, 'Server-Name': server,\
+                   #'Host': host, 'Remote-Host': remote_host}}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     else:
         return HttpResponse('NOPE', status=200)
