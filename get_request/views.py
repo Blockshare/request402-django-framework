@@ -83,10 +83,13 @@ def ip(request):
 
 
 # Returns the GET Header data. Output is JSON
+# Will work on this for deployment once the application is deployed.
 @api_view(['GET'])
 @payment.required(10)
 def get(request):
 
+    return HttpResponse('Soon...', status=200)
+    """
     http_accept = request.META.get('HTTP_ACCEPT')
     http_accept_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
@@ -115,3 +118,4 @@ def get(request):
     else:
         return HttpResponse('NOPE', status=200)
 
+    """
