@@ -18,15 +18,17 @@ How to use:
 
 
 <p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Google</p>
-<pre><code> {
-    "200": "OK",
+<pre><code>{
     "Headers": {
-        "P3P": "CP=\"This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en for more info.\"",
-        "Expires": "-1",
-        "Cache-Control": "private, max-age=0",
-        "Content-Type": "text/html; charset=ISO-8859-1",
-        "Date": "Fri, 26 Aug 2016 19:24:02 GMT",
-        "Server": "gws"
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Fri, 26 Aug 2016 22:27:32 GMT",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "Server": "Apache",
+        "Content-Security-Policy": "referrer no-referrer;"
+    },
+    "Status": {
+        "200": "OK"
     }
 }
 </code></pre>
