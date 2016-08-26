@@ -12,12 +12,12 @@ Request the IP address, Headers, and Status Code of any website.
 
 How to use:
 
-    $ 21 buy https://www.request402.org/get_status?url=www.example.com -> Status and Headers
-    $ 21 buy https://www.request402.org/get_ip?url=www.example.com --> IP Address
+    $ 21 buy https://www.request402.org/get_status?uri=www.example.com -> Status and Headers
+    $ 21 buy https://www.request402.org/get_ip?uri=www.example.com --> IP Address
     $ 21 buy https://www.request402.org/ip --> User IP Address
 
 
-<p>Here is an example of the JSON response when running /get_status?url=www.example.com for Google</p>
+<p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Google</p>
 <pre><code> {
     "200": "OK",
     "Headers": {
@@ -30,7 +30,7 @@ How to use:
     }
 }
 </code></pre>
-<p>This is an example of runnng /get_ip?url=www.example.com for Google.</p>
+<p>This is an example of runnng /get_ip?uri=www.example.com for Google.</p>
 <pre><code>{
     "origin": "216.58.219.164",
     "url": "www.google.com"
