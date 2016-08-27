@@ -17,7 +17,7 @@ How to use:
     $ 21 buy https://www.request402.org/ip --> User IP Address
 
 
-<p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Google</p>
+<p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Slack</p>
 <pre><code>{
     "Headers": {
         "Content-Type": "text/html; charset=utf-8",
