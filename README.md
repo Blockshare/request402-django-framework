@@ -3,7 +3,9 @@ HTTP Request & Response Micropayments Service
 ===========================================
 ![Blockshare](https://machine-payable.herokuapp.com/static/img/abstractdot.ico)
 
-Request the IP address, Headers, and Status Code of any website.
+Request the IP address, Headers, and Status Code of any website for micropayments. More endpoints are being considered.
+
+All endpoint responses are JSON-encoded
 
 <h3> Basic Requirements </h3>
 
