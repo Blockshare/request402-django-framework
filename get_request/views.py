@@ -1,4 +1,4 @@
-from django.http import HttpResponsex
+from django.http import HttpResponse
 
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
@@ -16,7 +16,8 @@ def info(request):
     get_status_info = '\nReturns a websites HTTP status: 21 buy http://www.request402.org/get_status?uri=example.com\n'
     get_ip_info = 'Returns a websites IP: 21 buy http://www.request402.org/get_ip?uri=example.com\n'
     get_ip = 'Returns origin IP: 21 buy http://www.request402.org/ip'
-    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s\n" % (get_info_border, get_status_info, get_ip_info, get_ip, get_info_border), status=200)
+    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s\n" \
+                         % (get_info_border, get_status_info, get_ip_info, get_ip, get_info_border), status=200)
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
@@ -56,7 +57,7 @@ def get_ip(request):
     
     try:
         response = socket.gethostbyname(url)
-        message = {'Origin': response, 'Url': url}
+        message = {'IP_Info': {'Origin': response, 'Url': url}}
         data = json.dumps(message, indent=2)
         return HttpResponse(data, status=200)
     except:
