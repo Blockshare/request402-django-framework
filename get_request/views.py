@@ -5,6 +5,7 @@ from two1.bitserv.django import payment
 
 import socket
 import json
+import requests
 import urllib.request as my_request
 
 
@@ -118,3 +119,16 @@ def get(request):
         return HttpResponse('NOPE', status=200)
 
     """
+
+
+# Get JSON-encoded output of a Bitcoin wallet address
+@api_view(['GET'])
+@payment.required(1000)
+def address(request):
+
+    #return HttpResponse('Address output for wallet 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', status=200)
+    addr = request.GET.get('address')
+    response = requests.get('https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
+
+    return HttpResponse(response, status=200)
+    
