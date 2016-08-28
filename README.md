@@ -14,9 +14,10 @@ All endpoint responses are JSON-encoded
 
 How to use:
 
-    $ 21 buy https://www.request402.org/get_status?uri=www.example.com -> Status and Headers
-    $ 21 buy https://www.request402.org/get_ip?uri=www.example.com --> IP Address
+    $ 21 buy https://www.request402.org/get_status?uri=<www.example.com> -> Status and Headers
+    $ 21 buy https://www.request402.org/get_ip?uri=<www.example.com> --> IP Address
     $ 21 buy https://www.request402.org/ip --> User IP Address
+    $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Addres Information
 
 
 <p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Slack.</p>
@@ -44,5 +45,32 @@ How to use:
 <p>This is an example of running /ip </p>
 <pre><code>{
     "origin": 172.217.4.78
+}
+</code></pre>
+<p>This is an example of running /bitcoin?address=<wallet address> for 1ArJ9vRaQcoQ29mTWZH768AmRwzb6Zif1z</p>
+<pre><code>{
+    "address": "1ArJ9vRaQcoQ29mTWZH768AmRwzb6Zif1z",
+    "balance": 0,
+    "final_balance": 0,
+    "final_n_tx": 4,
+    "n_tx": 4,
+    "total_received": 82530000,
+    "total_sent": 82530000,
+    "txrefs": [
+        {
+            "spent": false,
+            "tx_hash": "474cce51a9c4b265d4da0257acb21a554563fd41200970996e2b8914dc6f1d68",
+            "tx_output_n": -1,
+            "confirmations": 129941,
+            "confirmed": "2014-04-23T11:44:27Z",
+            "value": 11550000,
+            "tx_input_n": 0,
+            "block_height": 297305,
+            "ref_balance": 0,
+            "double_spend": false
+        }
+    ],
+    "unconfirmed_balance": 0,
+    "unconfirmed_n_tx": 0
 }
 </code></pre>
