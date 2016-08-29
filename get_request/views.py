@@ -36,6 +36,7 @@ def get_status(request):
     website_url = request.GET.get('uri')
     url = 'http://'+website_url
 
+
     # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
@@ -125,10 +126,30 @@ def get(request):
 @api_view(['GET'])
 @payment.required(1000)
 def address(request):
+    """
+    Returns JSON-encoded output of Bitcoin wallet address information.
 
-    #return HttpResponse('Address output for wallet 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', status=200)
+    Input: => /bitcoin?address=<address>
+    Output: => {'variable': response}
+
+    """
+
     addr = request.GET.get('address')
     response = requests.get('https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
+    
+    data = response.json()
 
-    return HttpResponse(response, status=200)
+    address = data['address']
+    balance = data['balance'] / 100000000.0
+    fnl_balance = data['final_balance'] / 100000000.0
+    total_rec = data['total_received'] / 100000000.0
+    total_sent = data['total_sent'] / 100000000.0
+
+    try:
+        address_json = {'Bitcoin': {'balance': balance,'final_balance': fnl_balance, \
+                        'total_received': total_rec, 'total_sent': total_sent}, 'address': address}
+        return HttpResponse(json.dumps(address_json, indent=2), status=200)
+    except:
+        exception = {"Exception": "%s may not be a proper bitcoin address" % (address)}
+        return HttpResponse(json.dumps(exception))
     
