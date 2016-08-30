@@ -102,16 +102,14 @@ def get(request):
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     content_type = request.META.get('CONTENT_TYPE')
-    content_length = request.META.get('CONTENT_LENGTH')
 
     try:
         accept = http_accept.split(',')[0]
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         content = content_type.split(',')[0]
-        length = content_length.split(',')[0]
         response = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
-                    'Content-Type': content, 'Content-Length': length}}
+                    'Content-Type': content}}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
