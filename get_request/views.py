@@ -99,10 +99,12 @@ def get(request):
     #return HttpResponse('Soon...', status=200)
 
     http_accept = request.META.get('HTTP_ACCEPT')
+    http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
 
     try:
         accept = http_accept.split(',')[0]
-        response = {'accept': accept}
+        encoding = http_encoding.split(',')[0]
+        response = {'Headers': {'accept': accept, 'encoding': encoding}}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
