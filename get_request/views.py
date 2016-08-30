@@ -72,6 +72,13 @@ def get_ip(request):
 def ip(request):
     # Add Comment code for input and Output
     # Change from "if-else" conditional to "try-except".
+    """
+    Input: => /ip
+    Output: => JSON-encoded output of IP origin and URL.
+    ex: {"origin": ip_address, "url", "url}
+
+    """
+
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
@@ -89,7 +96,17 @@ def ip(request):
 @payment.required(10)
 def get(request):
 
-    return HttpResponse('Soon...', status=200)
+    #return HttpResponse('Soon...', status=200)
+
+    http_accept = request.META.get('HTTP_ACCEPT')
+
+    try:
+        accept = http_accept.split(',')[0]
+        response = {'accept': accept}
+        return HttpResponse(json.dumps(response, indent=2), status=200)
+    except:
+        exception = {"Exception": "Something isn't working correctly here."}
+        return HttpResponse(json.dumps(exception))
     """
     http_accept = request.META.get('HTTP_ACCEPT')
     http_accept_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
