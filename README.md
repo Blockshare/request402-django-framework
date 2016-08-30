@@ -17,6 +17,7 @@ How to use:
     $ 21 buy https://www.request402.org/get_status?uri=<www.example.com> -> Status and Headers
     $ 21 buy https://www.request402.org/get_ip?uri=<www.example.com> --> IP Address
     $ 21 buy https://www.request402.org/ip --> User IP Address
+    $ 21 buy https://www.request402.org/get --> return GET data
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Addres Information
 
 
