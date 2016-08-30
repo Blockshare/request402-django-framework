@@ -103,7 +103,6 @@ def get(request):
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     content_type = request.META.get('CONTENT_TYPE')
     content_length = request.META.get('CONTENT_LENGTH')
-    http_host = request.META.get('HTTP_HOST')
 
     try:
         accept = http_accept.split(',')[0]
@@ -111,9 +110,8 @@ def get(request):
         agent = http_user_agent.split(',')[0]
         content = content_type.split(',')[0]
         length = content_length.split(',')[0]
-        host = http_host.split(',')[0]
         response = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
-                    'Content-Type': content, 'Content-Length': length, 'HTTP_Host': host}}
+                    'Content-Type': content, 'Content-Length': length}}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
