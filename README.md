@@ -48,6 +48,18 @@ How to use:
     "origin": 172.217.4.78
 }
 </code></pre>
+<p>This is an example running /get </p>
+<pre><code>{
+    "Headers": {
+        "User-Agent": "python-requests/2.11.1",
+        "HTTP-Host": "www.request402.org",
+        "Accept": "*/*",
+        "Encoding": "gzip"
+    },
+    "Origin": "107.170.63.241"
+}
+</code></pre>
+
 <p>This is an example of running /bitcoin?address=<wallet address> for 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.</p>
 <pre><code>{
     "Bitcoin": {
