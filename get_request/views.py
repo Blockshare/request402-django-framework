@@ -82,14 +82,6 @@ def ip(request):
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
-    try:
-        ip = x_forwarded_for.split(',')[0]
-        message = {'Origin', ip}
-        return HttpResponse(json.dumps(message, indent=2), status=200)
-    except:
-        exception = {'Exception': 'Something might be broken.'}
-        return HttpResponse(json.dumps(exception, indent=2), status=200)
-    """    
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
         message = {'Origin': ip}
@@ -98,7 +90,7 @@ def ip(request):
         ip = request.META.get('REMOTE_ADDR')
         message = {'Origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
-    """
+
 # Returns the GET Header data. Output is JSON
 @api_view(['GET'])
 @payment.required(2000)
