@@ -97,8 +97,6 @@ def ip(request):
 def get(request):
 
     args = request.GET.get('args')
-    if args == null:
-        args = {}
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
