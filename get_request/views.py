@@ -23,7 +23,7 @@ def info(request):
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
-@payment.required(10)
+@payment.required(2000)
 def get_status(request):
 
     """
@@ -53,7 +53,7 @@ def get_status(request):
 
 # Get the IP address of a website. Output in JSON
 @api_view(['GET'])
-@payment.required(10)
+@payment.required(2000)
 def get_ip(request):
     # Add function description comment code.    
     url = request.GET.get('uri')
@@ -69,7 +69,7 @@ def get_ip(request):
 
 # Get the IP address of user. Output in JSON
 @api_view(['GET'])
-@payment.required(10)
+@payment.required(2000)
 def ip(request):
     # Add Comment code for input and Output
     # Change from "if-else" conditional to "try-except".
@@ -81,6 +81,15 @@ def ip(request):
     """
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+    try:
+        ip = x_forwarded_for.split(',')[0]
+        message = {'Origin', ip}
+        return HttpResponse(json.dumps(message, indent=2), status=200)
+    except:
+        exception = {'Exception': 'Something might be broken.'}
+        return HttpResponse(json.dumps(exception, indent=2), status=200)
+    """    
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
         message = {'Origin': ip}
@@ -89,11 +98,10 @@ def ip(request):
         ip = request.META.get('REMOTE_ADDR')
         message = {'Origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
-
-
+    """
 # Returns the GET Header data. Output is JSON
 @api_view(['GET'])
-@payment.required(10)
+@payment.required(2000)
 def get(request):
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
