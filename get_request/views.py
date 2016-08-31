@@ -42,13 +42,13 @@ def get_status(request):
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
-        message = {'Status': {response.status : response.reason}, 'Headers': {headers[0][0]: headers[0][1], \
+        message = {'status': {response.status : response.reason}, 'headers': {headers[0][0]: headers[0][1], \
                    headers[1][0]: headers[1][1], headers[2][0]: headers[2][1], \
                    headers[3][0]: headers[3][1], headers[4][0]: headers[4][1], \
                    headers[5][0]: headers[5][1]}}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
-        exception = {"Exception raised" : "Possibly %s doesn't exist" % (url)}
+        exception = {"exception raised" : "possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
 
 # Get the IP address of a website. Output in JSON
@@ -60,11 +60,11 @@ def get_ip(request):
     
     try:
         response = socket.gethostbyname(url)
-        message = {'IP_Info': {'Origin': response, 'Url': url}}
+        message = {'ip_info': {'origin': response, 'url': url}}
         data = json.dumps(message, indent=2)
         return HttpResponse(data, status=200)
     except:
-        exception = {"Excpetion raised" : "Possible %s doesn't exist" % (url)}
+        exception = {"excpetion raised" : "possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
 
 # Get the IP address of user. Output in JSON
@@ -84,11 +84,11 @@ def ip(request):
 
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
-        message = {'Origin': ip}
+        message = {'origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     else:
         ip = request.META.get('REMOTE_ADDR')
-        message = {'Origin': ip}
+        message = {'origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
 
 # Returns the GET Header data. Output is JSON
@@ -108,7 +108,7 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
-        response = {'Headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
+        response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
                     'HTTP-Host': host}, 'Origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
