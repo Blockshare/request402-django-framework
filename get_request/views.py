@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
-import netifaces
 import socket
 import json
 import requests

@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^ip$', get_request.views.ip),
     url(r'^get$', get_request.views.get),
     url(r'^bitcoin$', get_request.views.address),
+    url(r'^ipinfo$', get_request.views.ip_info),
 ]
