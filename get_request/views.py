@@ -175,7 +175,7 @@ def ip_info(request):
         exception = {"Exception": "Something isn't working correctly here."}
         return HttpResponse(json.dumps(exception), status=200)
 
-
+"""
 from two1.wallet import Wallet
 wallet = Wallet()
 
@@ -187,3 +187,4 @@ def zero_tier(request):
     addrs = addr[netifaces.AF_INET][0]['addr']
     response = {'zero_tier': {'ip': addrs, 'wallet': wallet.get_payout_address()}}
     return HttpResponse(json.dumps(response, indent=2), status=200)
+"""
