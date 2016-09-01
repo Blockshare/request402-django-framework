@@ -176,7 +176,7 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-
+"""
 @api_view(['GET'])
 @payment.required(10)
 def zero_tier(request):
@@ -185,3 +185,4 @@ def zero_tier(request):
     addrs = addr[netifaces.AF_INET][0]['addr']
     response = {'zero_tier': {'ip': addrs}}
     return HttpResponse(json.dumps(response, indent=2), status=200)
+"""
