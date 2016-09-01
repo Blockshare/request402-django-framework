@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
+import netifaces
 import socket
 import json
 import requests
@@ -104,7 +105,6 @@ def get(request):
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
 
-
     try:
         origin = x_forwarded_for.split(',')[0]
         accept = http_accept.split(',')[0]
@@ -149,10 +149,44 @@ def address(request):
     except:
         exception = {"Exception": "%s may not be a proper bitcoin address" % (address)}
         return HttpResponse(json.dumps(exception))
-    
+
+# Output all JSON-encoded IP information.    
+@api_view(['GET'])
+@payment.required(2000)
+def ip_info(request):
+
+    data = request.GET.get('uri')
+    uri = 'http://ipinfo.io'
+    raw = requests.get(uri)
+    data = raw.json()
+
+    http_accept = request.META.get('HTTP_ACCEPT')
+    http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
+    http_user_agent = request.META.get('HTTP_USER_AGENT')
+
+    try:
+        accept = http_accept.split(',')[0]
+        encoding = http_encoding.split(',')[0]
+        agent = http_user_agent.split(',')[0]
+        response = {'headers': {'accept': accept, 'encoding': encoding, \
+                    'User-Agent': agent}, 'server': data}
+        return HttpResponse(json.dumps(response, indent=2), status=200)
+    except:
+        exception = {"Exception": "Something isn't working correctly here."}
+        return HttpResponse(json.dumps(exception), status=200)
+
+from two1.wallet import Wallet
+from two1.bitrequests import BitTransferRequests
+wallet = Wallet()
+wallet_requests = BitTransferRequests(wallet)
 
 @api_view(['GET'])
-@payment.required(5)
-def ping(request):
+@payment.required(10)
+def zero_tier(request):
 
-    return HttpResponse('PING ME BABY!', status=200)
+    addr = netifaces.ifaddresses('zt2')
+    addrs = addr[netifaces.AF_INET][0]['addr']
+    info = wallet_requests.get_402_info('http://'+addrs+':6000')
+    response = {'zero_tier': {'ip': addrs, 'wallet': wallet.get_payout_address()}}
+    return HttpResponse(json.dumps(response, indent=2), status=200)
+
