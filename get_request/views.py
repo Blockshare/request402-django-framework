@@ -97,6 +97,7 @@ def ip(request):
 def get(request):
 
     args = request.GET.get('args')
+    uri = 'http://ipinfo.io'
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
@@ -104,12 +105,14 @@ def get(request):
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
 
+
     try:
         origin = x_forwarded_for.split(',')[0]
         accept = http_accept.split(',')[0]
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
+        data = requests.get(uri + '/' + origin + '/org')
         response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
                     'HTTP-Host': host, 'args': args}, 'origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
@@ -149,3 +152,9 @@ def address(request):
         exception = {"Exception": "%s may not be a proper bitcoin address" % (address)}
         return HttpResponse(json.dumps(exception))
     
+
+@api_view(['GET'])
+@payment.required(5)
+def ping(request):
+
+    return HttpResponse('PING ME BABY!', status=200)
