@@ -175,18 +175,3 @@ def ip_info(request):
         exception = {"Exception": "Something isn't working correctly here."}
         return HttpResponse(json.dumps(exception), status=200)
 
-from two1.wallet import Wallet
-from two1.bitrequests import BitTransferRequests
-wallet = Wallet()
-wallet_requests = BitTransferRequests(wallet)
-
-@api_view(['GET'])
-@payment.required(10)
-def zero_tier(request):
-
-    addr = netifaces.ifaddresses('zt2')
-    addrs = addr[netifaces.AF_INET][0]['addr']
-    info = wallet_requests.get_402_info('http://'+addrs+':6000')
-    response = {'zero_tier': {'ip': addrs, 'wallet': wallet.get_payout_address()}}
-    return HttpResponse(json.dumps(response, indent=2), status=200)
-
