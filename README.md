@@ -51,6 +51,7 @@ How to use:
 <p>This is an example running /get </p>
 <pre><code>{
     "Headers": {
+        "args": null,
         "User-Agent": "python-requests/2.11.1",
         "HTTP-Host": "www.request402.org",
         "Accept": "*/*",
