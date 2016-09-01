@@ -176,15 +176,12 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-from two1.wallet import Wallet
-wallet = Wallet()
 
 @api_view(['GET'])
 @payment.required(10)
 def zero_tier(request):
 
-    wallet_data = wallet.get_payout_address()
     addr = netifaces.ifaddresses('zt2')
     addrs = addr[netifaces.AF_INET][0]['addr']
-    response = {'zero_tier': {'ip': addrs, 'wallet': 'wallet'}}
+    response = {'zero_tier': {'ip': addrs}}
     return HttpResponse(json.dumps(response, indent=2), status=200)
