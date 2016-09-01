@@ -183,7 +183,8 @@ wallet = Wallet()
 @payment.required(10)
 def zero_tier(request):
 
+    wallet_data = wallet.get_payout_address()
     addr = netifaces.ifaddresses('zt2')
     addrs = addr[netifaces.AF_INET][0]['addr']
-    response = {'zero_tier': {'ip': addrs, 'wallet': wallet.get_payout_address()}}
+    response = {'zero_tier': {'ip': addrs, 'wallet': 'wallet'}}
     return HttpResponse(json.dumps(response, indent=2), status=200)

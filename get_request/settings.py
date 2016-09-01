@@ -56,8 +56,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'get_request',
     'two1.bitserv.django',
-    'two1.wallet',
-    'two1.bitrequests',
 )
 
 MIDDLEWARE_CLASSES = (
