@@ -112,9 +112,9 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
-        data = requests.get(uri + '/' + origin + '/org')
+        org = requests.get(uri + '/' + origin + '/org')
         response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
-                    'HTTP-Host': host, 'args': args}, 'origin': origin}
+                    'HTTP-Host': host, 'args': args, 'Org': org}, 'origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
