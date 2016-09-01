@@ -18,6 +18,7 @@ How to use:
     $ 21 buy https://www.request402.org/get_ip?uri=<www.example.com> --> IP Address
     $ 21 buy https://www.request402.org/ip --> User IP Address
     $ 21 buy https://www.request402.org/get --> return GET data
+    $ 21 buy https://www.request402.org/ipinfo --> IP, Header, and Location information
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Addres Information
 
 
@@ -47,19 +48,19 @@ How to use:
 
 <p>This is an example of running /ip </p>
 <pre><code>{
-    "origin": 172.217.4.78
+    "origin": xxx.xxx.x.xx
 }
 </code></pre>
 <p>This is an example running /get </p>
 <pre><code>{
     "headers": {
         "args": null,
-        "User-Agent": "python-requests/2.11.1",
-        "HTTP-Host": "www.request402.org",
+        "User-Agent": "xxxxxx",
+        "HTTP-Host": "www.xxxxxx.com",
         "Accept": "*/*",
         "Encoding": "gzip"
     },
-    "origin": "107.170.63.241"
+    "origin": "xxx.xxx.xx.xxx"
 }
 </code></pre>
 
@@ -72,5 +73,24 @@ How to use:
         "total_received": 16.31927487
     },
     "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+}
+</code></pre>
+<p>This is an example of running /ipinfo.</p>
+<pre><code>{
+    "headers": {
+        "encoding": "gzip",
+        "accept": "*/*",
+        "User-Agent": "xxxxxx"
+    },
+    "server": {
+        "loc": "xx,xx",
+        "ip": "xx.xx.xx.xxx",
+        "city": "Ashburn",
+        "org": "AS14618 Amazon.com, Inc.",
+        "hostname": "ec2-xx-xx-xx-xxx.compute-x.amazonaws.com",
+        "region": "Virginia",
+        "postal": "20149",
+        "country": "US"
+    }
 }
 </code></pre>
