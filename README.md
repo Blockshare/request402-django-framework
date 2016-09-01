@@ -23,7 +23,7 @@ How to use:
 
 <p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Slack.</p>
 <pre><code>{
-    "Headers": {
+    "headers": {
         "Content-Type": "text/html; charset=utf-8",
         "Date": "Fri, 26 Aug 2016 22:27:32 GMT",
         "Transfer-Encoding": "chunked",
@@ -31,15 +31,17 @@ How to use:
         "Server": "Apache",
         "Content-Security-Policy": "referrer no-referrer;"
     },
-    "Status": {
+    "status": {
         "200": "OK"
     }
 }
 </code></pre>
 <p>This is an example of runnng /get_ip?uri=www.example.com for Google.</p>
 <pre><code>{
-    "origin": "216.58.219.164",
-    "url": "www.google.com"
+    "ip_info": {
+        "url": "google.com",
+        "origin": "74.125.29.138"
+    }
 }
 </code></pre>
 
@@ -50,14 +52,14 @@ How to use:
 </code></pre>
 <p>This is an example running /get </p>
 <pre><code>{
-    "Headers": {
+    "headers": {
         "args": null,
         "User-Agent": "python-requests/2.11.1",
         "HTTP-Host": "www.request402.org",
         "Accept": "*/*",
         "Encoding": "gzip"
     },
-    "Origin": "107.170.63.241"
+    "origin": "107.170.63.241"
 }
 </code></pre>
 
