@@ -9,6 +9,12 @@ import json
 import requests
 import urllib.request as my_request
 
+import platform
+import shutil
+import subprocess
+import sys
+from urllib.parse import urlparse
+
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -176,13 +182,19 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-"""
-@api_view(['GET'])
-@payment.required(10)
-def zero_tier(request):
+from two1.wallet import Wallet
+from two1.bitrequests import BitTransferRequests
+from two1.commands.config import Config
 
-    addr = netifaces.ifaddresses('zt2')
-    addrs = addr[netifaces.AF_INET][0]['addr']
-    response = {'zero_tier': {'ip': addrs}}
+wallet = Wallet()
+username = Config().username
+wallet_requests = BitTransferRequests(wallet)
+
+
+@api_view(['GET'])
+@payment.required(2000)
+def get_wallet(request):
+
+    address = wallet.get_payout_address()
+    response = {'wallet': {'address': address, 'username': username}}
     return HttpResponse(json.dumps(response, indent=2), status=200)
-"""
