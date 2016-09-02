@@ -182,19 +182,3 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-from two1.wallet import Wallet
-from two1.bitrequests import BitTransferRequests
-from two1.commands.config import Config
-
-wallet = Wallet()
-username = Config().username
-wallet_requests = BitTransferRequests(wallet)
-
-
-@api_view(['GET'])
-@payment.required(2000)
-def get_wallet(request):
-
-    address = wallet.get_payout_address()
-    response = {'wallet': {'address': address, 'username': username}}
-    return HttpResponse(json.dumps(response, indent=2), status=200)
