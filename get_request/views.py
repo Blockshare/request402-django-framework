@@ -21,18 +21,14 @@ def info(request):
     return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s\n" \
                          % (get_info_border, get_status_info, get_ip_info, get_get, get_ip, get_info_border), status=200)
 
+
+
+
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
 @payment.required(2500)
 def get_status(request):
 
-    """
-    Function calls a website url and returns json output of headers and status code.
-
-    Input: => https://www.request402.org/get_status?url=example.com
-    Output: => JSON {status, headers}
-    """
-    
     # Get the website url and assign it to variable url. 
     website_url = request.GET.get('uri')
     url = 'http://'+website_url
@@ -51,13 +47,18 @@ def get_status(request):
         exception = {"exception raised" : "possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
 
+
+
+
 # Get the IP address of a website. Output in JSON
 @api_view(['GET'])
 @payment.required(2500)
 def get_ip(request):
-    # Add function description comment code.    
+    
+    # grab the url for the IP address.    
     url = request.GET.get('uri')
     
+    # Assign url and IP to variables and return them as JSON-encoded output.
     try:
         response = socket.gethostbyname(url)
         message = {'ip_info': {'origin': response, 'url': url}}
@@ -66,6 +67,9 @@ def get_ip(request):
     except:
         exception = {"excpetion raised" : "possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
+
+
+
 
 # Get the IP address of user. Output in JSON
 @api_view(['GET'])
@@ -82,28 +86,34 @@ def ip(request):
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
-    if x_forwarded_for:
+    try:
         ip = x_forwarded_for.split(',')[0]
         message = {'origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
-    else:
+    except:
         ip = request.META.get('REMOTE_ADDR')
         message = {'origin': ip}
         return HttpResponse(json.dumps(message, indent=2), status=200)
+
+
+
 
 # Returns the GET Header data. Output is JSON
 @api_view(['GET'])
 @payment.required(2500)
 def get(request):
 
+    # Grab and arguments as a string.
     args = request.GET.get('args')
 
+    # Grab Header information using Djangos request.META.get command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
 
+    # Assign Header information to variables and return as JSON-encoded output.
     try:
         origin = x_forwarded_for.split(',')[0]
         accept = http_accept.split(',')[0]
@@ -118,29 +128,27 @@ def get(request):
         return HttpResponse(json.dumps(exception))
 
 
+
+
 # Get JSON-encoded output of a Bitcoin wallet address
 @api_view(['GET'])
 @payment.required(2500)
 def address(request):
-    """
-    Returns JSON-encoded output of Bitcoin wallet address information.
 
-    Input: => /bitcoin?address=<address>
-    Output: => {'variable': response}
-
-    """
-
+    # Assign a wallet address to a variable, place in API url, and return as JSON.
     addr = request.GET.get('address')
     response = requests.get('https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
     
     data = response.json()
 
+    # Assign JSON output to variables.
     address = data['address']
     balance = data['balance'] / 100000000.0
     fnl_balance = data['final_balance'] / 100000000.0
     total_rec = data['total_received'] / 100000000.0
     total_sent = data['total_sent'] / 100000000.0
 
+    # Return JSON-encoded output of variables.
     try:
         address_json = {'Bitcoin': {'balance': balance,'final_balance': fnl_balance, \
                         'total_received': total_rec, 'total_sent': total_sent}, 'address': address}
@@ -149,20 +157,26 @@ def address(request):
         exception = {"Exception": "%s may not be a proper bitcoin address" % (address)}
         return HttpResponse(json.dumps(exception))
 
+
+
+
 # Output all JSON-encoded IP information.    
 @api_view(['GET'])
 @payment.required(2500)
 def ip_info(request):
-
+    
+    # Grab and assign URL information to JSON-encoded file.
     data = request.GET.get('uri')
     uri = 'http://ipinfo.io'
     raw = requests.get(uri)
     data = raw.json()
 
+    # Grab and assign Header information from Django request.META.get command.
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
 
+    # Combine variables and return all as JSON-encoded output.
     try:
         accept = http_accept.split(',')[0]
         encoding = http_encoding.split(',')[0]
