@@ -3,17 +3,10 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
-import netifaces
 import socket
 import json
 import requests
 import urllib.request as my_request
-
-import platform
-import shutil
-import subprocess
-import sys
-from urllib.parse import urlparse
 
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
@@ -30,7 +23,7 @@ def info(request):
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
-@payment.required(2000)
+@payment.required(2500)
 def get_status(request):
 
     """
@@ -60,7 +53,7 @@ def get_status(request):
 
 # Get the IP address of a website. Output in JSON
 @api_view(['GET'])
-@payment.required(2000)
+@payment.required(2500)
 def get_ip(request):
     # Add function description comment code.    
     url = request.GET.get('uri')
@@ -76,7 +69,7 @@ def get_ip(request):
 
 # Get the IP address of user. Output in JSON
 @api_view(['GET'])
-@payment.required(2000)
+@payment.required(2500)
 def ip(request):
     # Add Comment code for input and Output
     # Change from "if-else" conditional to "try-except".
@@ -100,7 +93,7 @@ def ip(request):
 
 # Returns the GET Header data. Output is JSON
 @api_view(['GET'])
-@payment.required(2000)
+@payment.required(2500)
 def get(request):
 
     args = request.GET.get('args')
@@ -127,7 +120,7 @@ def get(request):
 
 # Get JSON-encoded output of a Bitcoin wallet address
 @api_view(['GET'])
-@payment.required(1000)
+@payment.required(2500)
 def address(request):
     """
     Returns JSON-encoded output of Bitcoin wallet address information.
@@ -158,7 +151,7 @@ def address(request):
 
 # Output all JSON-encoded IP information.    
 @api_view(['GET'])
-@payment.required(2000)
+@payment.required(2500)
 def ip_info(request):
 
     data = request.GET.get('uri')
