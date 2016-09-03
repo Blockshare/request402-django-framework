@@ -14,7 +14,7 @@ import urllib.request as my_request
 @payment.required(0)
 def info(request):
     get_info_border = '-------------------------------------------------------------------------------------------'
-    get_status_info = '\nReturns a websites HTTP status: 21 buy https://www.request402.org/get_status?uri=example.com\n'
+    get_status_info = '\nAll endpoints cost 2500 satoshi. \nReturns a websites HTTP status: 21 buy https://www.request402.org/get_status?uri=example.com\n'
     get_ip_info = 'Returns a websites IP: 21 buy https://www.request402.org/get_ip?uri=example.com\n'
     get_ip = 'Returns origin IP: 21 buy https://www.request402.org/ip\n'
     get_get = 'Returns GET data: 21 buy https://www.request402.org/get'
