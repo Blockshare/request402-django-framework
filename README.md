@@ -5,7 +5,7 @@ HTTP Request & Response Micropayments Service
 
 Request the IP address, Headers, and Status Code of any website for micropayments. More endpoints are being considered.
 
-All endpoint responses are JSON-encoded and cost 2500 satoshis. This is about $0.014 at current exchange prices.
+All endpoint responses are JSON-encoded and cost 2500 satoshis. This is about $0.015 at current exchange prices.
 
 <h3> Basic Requirements </h3>
 
