@@ -29,6 +29,7 @@ TWO1_WALLET_MNEMONIC = os.environ.get("TWO1_WALLET_MNEMONIC")
 TWO1_USERNAME = os.environ.get("TWO1_USERNAME")
 WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
 
+CERTLY_API = os.environ.get("CERTLY_API")
 # load database from the DATABASE_URL environment variable
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)

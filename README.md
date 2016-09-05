@@ -33,6 +33,7 @@ How to use:
         "Content-Security-Policy": "referrer no-referrer;"
     },
     "status": {
+        "trust": "clean",
         "200": "OK"
     }
 }

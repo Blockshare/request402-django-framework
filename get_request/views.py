@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
+from get_request.settings import CERTLY_API
+from get_request.settings import WALLET
+
 import socket
 import json
 import requests
@@ -33,12 +36,13 @@ def get_status(request):
     website_url = request.GET.get('uri')
     url = 'http://'+website_url
 
+    certify = requests.get('https://api.certly.io/v1/lookup?url='+url+'&token='+CERTLY_API).json()['data'][0]['status']
 
     # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
-        message = {'status': {response.status : response.reason}, 'headers': {headers[0][0]: headers[0][1], \
+        message = {'status': {response.status : response.reason, 'trust': certify}, 'headers': {headers[0][0]: headers[0][1], \
                    headers[1][0]: headers[1][1], headers[2][0]: headers[2][1], \
                    headers[3][0]: headers[3][1], headers[4][0]: headers[4][1], \
                    headers[5][0]: headers[5][1]}}
@@ -46,7 +50,6 @@ def get_status(request):
     except:
         exception = {"exception raised" : "possibly %s doesn't exist" % (url)}
         return HttpResponse(json.dumps(exception, indent=2))
-
 
 
 
@@ -75,15 +78,10 @@ def get_ip(request):
 @api_view(['GET'])
 @payment.required(2500)
 def ip(request):
-    # Add Comment code for input and Output
-    # Change from "if-else" conditional to "try-except".
-    """
-    Input: => /ip
-    Output: => JSON-encoded output of IP origin and URL.
-    ex: {"origin": ip_address, "url", "url}
+    
+    # Not sure if this function is still needed. Will keep it for now.
 
-    """
-
+    # IP address information from Django's 'request.META.get' command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
     try:
