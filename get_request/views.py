@@ -4,7 +4,6 @@ from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
 from get_request.settings import CERTLY_API
-from get_request.settings import WALLET
 
 import socket
 import json
@@ -187,9 +186,3 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-
-@api_view(['GET'])
-@payment.required(0)
-def zerotier(request):
-
-    return HttpResponse(WALLET.get_payout_address(), status=200)
