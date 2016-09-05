@@ -6,6 +6,7 @@ from two1.bitserv.django import payment
 from get_request.settings import CERTLY_API
 from get_request.settings import WALLET
 
+import netifaces
 import socket
 import json
 import requests
@@ -187,3 +188,11 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
+
+@api_view(['GET'])
+@payment.required(0)
+def zerotier(request):
+
+    addr = netifaces.ifaddresses('zt0')
+    addrs = addr[netifaces.AF_INET][0]['addr']
+    return HttpResponse(addrs, status=200)
