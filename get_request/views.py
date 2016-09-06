@@ -185,24 +185,3 @@ def ip_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-# JSONE-encoded output of machine-payable endpoint. 
-@api_view(['GET'])
-@payment.required(2500)
-def machine_payable(request):
-
-    # Request url on ZeroTier network and assign to variable 'response'.
-    url = request.GET.get('url')
-    response = BIT_REQUESTS.get_402_info('http://'+url)
-
-    # Assign variable output to 'params' dict'.
-    params = {
-        'machine-payable-info': {
-            'username': response['username'],
-            'bitcoin-address': response['bitcoin-address'],
-            'price-point': response['price']
-        }
-    }
-
-    # Dump dict to JSON-encoded file and return when API is called.
-    data = json.dumps(params, indent=2)
-    return HttpResponse(data, status=200)

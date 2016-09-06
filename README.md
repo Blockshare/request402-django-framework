@@ -20,7 +20,6 @@ How to use:
     $ 21 buy https://www.request402.org/get --> return GET data
     $ 21 buy https://www.request402.org/ipinfo --> IP, Header, and Location information
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Address Information
-    $ 21 buy https://www.request402.com/machine-payable?url=<zerotier ip address> --> Username, Address, Price
 
 
 <p>Here is an example of the JSON response when running /get_status?uri=www.example.com for Slack.</p>
@@ -93,15 +92,6 @@ How to use:
         "region": "Virginia",
         "postal": "20149",
         "country": "US"
-    }
-}
-</code></pre>
-<p> An example of /machine-payable output.</p>
-<pre><code>{
-    "machine-payable-info": {
-        "price-point": 5000,
-        "bitcoin-address": "iAmAbItCoInWaLlEtAdDrEsSfOrMoNeYoK",
-        "username": "zerotier-user"
     }
 }
 </code></pre>
