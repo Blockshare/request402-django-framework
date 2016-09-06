@@ -25,8 +25,6 @@ def info(request):
                          % (get_info_border, get_status_info, get_ip_info, get_get, get_ip, get_info_border), status=200)
 
 
-
-
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
 @payment.required(2500)
