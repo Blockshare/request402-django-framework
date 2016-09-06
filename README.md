@@ -99,9 +99,9 @@ How to use:
 <p> An example of /machine-payable output.</p>
 <pre><code>{
     "machine-payable-info": {
-        "price-point": 1800,
-        "bitcoin-address": "1Gg7gMwe4kMNjF2jZra7MSmGJJnpFzqjPb",
-        "username": "binns"
+        "price-point": 5000,
+        "bitcoin-address": "iAmAbItCoInWaLlEtAdDrEsSfOrMoNeYoK",
+        "username": "zerotier-user"
     }
 }
 </code></pre>
