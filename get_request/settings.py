@@ -15,6 +15,8 @@ import os
 import dotenv
 import dj_database_url
 from two1.wallet import Two1Wallet
+from two1.bitrequests import BitTransferRequests
+from two1.commands.config import Config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -28,6 +30,8 @@ if os.path.isfile(dotenv_file):
 TWO1_WALLET_MNEMONIC = os.environ.get("TWO1_WALLET_MNEMONIC")
 TWO1_USERNAME = os.environ.get("TWO1_USERNAME")
 WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
+USERNAME = Config().username
+BIT_REQUESTS = BitTransferRequests(WALLET, USERNAME)
 
 CERTLY_API = os.environ.get("CERTLY_API")
 # load database from the DATABASE_URL environment variable
