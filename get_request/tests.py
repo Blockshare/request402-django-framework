@@ -29,7 +29,6 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/bitcoin?address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa')
         self.assertEqual(resp.status_code, 402)
 
-
     def test_ipinfo(self):
         resp = self.client.get('/ipinfo')
         self.assertEqual(resp.status_code, 402)

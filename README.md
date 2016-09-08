@@ -16,9 +16,9 @@ How to use:
 
     $ 21 buy https://www.request402.org/get_status?uri=<www.example.com> -> Status and Headers
     $ 21 buy https://www.request402.org/get_ip?uri=<www.example.com> --> IP Address
-    $ 21 buy https://www.request402.org/ip --> User IP Address
+    $ 21 buy https://www.request402.org/ip --> User origin IP Address
     $ 21 buy https://www.request402.org/get --> return GET data
-    $ 21 buy https://www.request402.org/ipinfo --> IP, Header, and Location information
+    $ 21 buy https://www.request402.org/server-location --> IP, Header, and Location information
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Address Information
 
 
@@ -76,7 +76,7 @@ How to use:
     "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
 }
 </code></pre>
-<p>This is an example of running /ipinfo.</p>
+<p>This is an example of running /server-location.</p>
 <pre><code>{
     "headers": {
         "encoding": "gzip",

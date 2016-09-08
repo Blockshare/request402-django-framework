@@ -4,7 +4,6 @@ from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
 from get_request.settings import CERTLY_API
-from get_request.settings import BIT_REQUESTS
 
 import socket
 import json
@@ -19,10 +18,10 @@ def info(request):
     get_info_border = '-------------------------------------------------------------------------------------------'
     get_status_info = '\nAll endpoints cost 2500 satoshi. \nReturns a websites HTTP status: 21 buy https://www.request402.org/get_status?uri=example.com\n'
     get_ip_info = 'Returns a websites IP: 21 buy https://www.request402.org/get_ip?uri=example.com\n'
-    get_ip = 'Returns origin IP: 21 buy https://www.request402.org/ip\n'
     get_get = 'Returns GET data: 21 buy https://www.request402.org/get'
+    get_ipinfo = 'Returns origin IP data: 21 buy https://www.request402.org/ipinfo\n'
     return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s\n" \
-                         % (get_info_border, get_status_info, get_ip_info, get_get, get_ip, get_info_border), status=200)
+                         % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_info_border), status=200)
 
 
 # Get the header and status code from a website. Output in JSON.
@@ -159,7 +158,7 @@ def address(request):
 # Output all JSON-encoded IP information.    
 @api_view(['GET'])
 @payment.required(2500)
-def ip_info(request):
+def server_info(request):
     
     # Grab and assign URL information to JSON-encoded file.
     data = request.GET.get('uri')
