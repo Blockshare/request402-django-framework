@@ -14,11 +14,11 @@ All endpoint responses are JSON-encoded and cost 2500 satoshis. This is about $0
 
 How to use:
 
-    $ 21 buy https://www.request402.org/get_status?uri=<www.example.com> -> Status and Headers
-    $ 21 buy https://www.request402.org/get_ip?uri=<www.example.com> --> IP Address
-    $ 21 buy https://www.request402.org/ip --> User origin IP Address
-    $ 21 buy https://www.request402.org/get --> return GET data
-    $ 21 buy https://www.request402.org/server-location --> IP, Header, and Location information
+    $ 21 buy https://www.request402.com/get_status?uri=<www.example.com> -> Status and Headers
+    $ 21 buy https://www.request402.com/get_ip?uri=<www.example.com> --> IP Address
+    $ 21 buy https://www.request402.com/ip --> User origin IP Address
+    $ 21 buy https://www.request402.com/get --> return GET data
+    $ 21 buy https://www.request402.com/server-location --> IP, Header, and Location information
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Address Information
 
 
