@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
@@ -10,9 +11,8 @@ import json
 import requests
 import urllib.request as my_request
 
-
 def index(request):
-    return HttpResponse("Surfs up on the INFORMTION SUPERHIGHWAY!\n", status=200)
+    return render(request, '../templates/index.html', status=200)
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
