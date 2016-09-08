@@ -12,7 +12,7 @@ import urllib.request as my_request
 
 
 def index(request):
-    return HttpResponse("Surfs up on the INFORMTION SUPERHIGHWAY!", status=200)
+    return HttpResponse("Surfs up on the INFORMTION SUPERHIGHWAY!\n", status=200)
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
