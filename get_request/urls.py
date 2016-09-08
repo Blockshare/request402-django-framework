@@ -18,6 +18,7 @@ import get_request.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', get_request.views.index),
     url(r'^info$', get_request.views.info),
     url(r'^get_status$', get_request.views.get_status),
     url(r'^get_ip$', get_request.views.get_ip),
