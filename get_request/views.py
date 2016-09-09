@@ -79,8 +79,6 @@ def get_ip(request):
 @payment.required(2500)
 def ip(request):
     
-    # Not sure if this function is still needed. Will keep it for now.
-
     # IP address information from Django's 'request.META.get' command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
