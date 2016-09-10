@@ -37,6 +37,8 @@
   ol.man-decor li.tl {text-align:left}
   ol.man-decor li.tc {text-align:center;letter-spacing:4px}
   ol.man-decor li.tr {text-align:right;float:right}
+  #inner-code, code {border-radius:2px;white-space:pre-wrap;background-color:#e6e6e6;}
+  a { text-decoration:none; }
   </style>
   <style type="text/css" media="all">
   /* style: 80c */
@@ -60,16 +62,17 @@ ______                           _     ___ _____  _____
 Request the IP address, Headers, and Status Code of any website for micropayments.
 </img>
 <div class="mp">
-<p>Hosted in <a href="http://www.request402.com">HTTP</a>, <a href="https://www.request402.com">HTTPS</a></center>
-<h3> Basic Requirements </h3>
+<center><h2><p>Hosted in <a href="http://www.request402.com">HTTP</a> + <a href="https://www.request402.com">HTTPS</a></h2></center>
+<h2>Basic Requirements </h2>
+   1. A  <a href="https://21.co">21 Bitcoin Computer</a> or 21 installed.
+   2. You will need to be connected the 21 Zerotier Marketplace.
 
-<p>1. A  <a href="https://21.co">21 Bitcoin Computer</a> or 21 installed.</p>
-<p>2. You will need to be connected the 21 Zerotier Marketplace.</p>
+<h2>How to use:</h2>
+    <b>ENDPOINT:</b><a href="/get_status?format=json">/get_status</a>
+    $ 21 buy https://www.request402.com/get_status?uri=example.com
 
-
-How to use:
-    $ 21 buy https://www.request402.com/get_status?uri="www.example.com" -> Status and Headers
-<pre><code>{
+<pre id="inner-code"><code>
+{
     "headers": {
         "Content-Type": "text/html; charset=utf-8",
         "Date": "Fri, 26 Aug 2016 22:27:32 GMT",
@@ -83,6 +86,7 @@ How to use:
         "200": "OK"
     }
 }
+
 </code></pre>
 </center>                                                                                                                                
 </body>

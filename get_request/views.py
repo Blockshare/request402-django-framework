@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
 from get_request.settings import CERTLY_API
+from get_request.settings import FULLCONTACT_API
 
 import socket
 import json
@@ -185,3 +186,13 @@ def server_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
+
+@api_view(['GET'])
+@payment.required(5)
+def company_information(request):
+
+    company = request.GET.get('url')
+
+    response = requests.get('https://api.fullcontact.com/v2/company/lookup.json?domain='+company+'&apiKey='+FULLCONTACT_API)
+
+    return HttpResponse(response, status=200)        
