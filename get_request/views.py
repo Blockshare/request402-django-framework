@@ -13,7 +13,7 @@ import requests
 import urllib.request as my_request
 
 def index(request):
-    return render(request, '../templates/use_this_for_now.html', status=200)
+    return render(request, '../templates/index.html', status=200)
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -34,7 +34,7 @@ def info(request):
 def get_status(request):
 
     # Get the website url and assign it to variable url. 
-    website_url = request.GET.get('uri')
+    website_url = request.GET.get('url')
     url = 'http://'+website_url
 
     certify = requests.get('https://api.certly.io/v1/lookup?url='+url+'&token='+CERTLY_API).json()['data'][0]['status']
