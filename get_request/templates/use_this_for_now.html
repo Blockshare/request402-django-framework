@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <title>request402</title>
+
+<link rel="shortcut icon" href="https://machine-payable.herokuapp.com/static/img/abstractdot.ico" />
   <style type="text/css" media="all">
   /* style: man */
   body#manpage {margin:0}
@@ -68,10 +70,10 @@ Request the IP address, Headers, and Status Code of any website for micropayment
    2. You will need to be connected the 21 Zerotier Marketplace.
 
 <h2>How to use:</h2>
-    <b>ENDPOINT:</b><a href="/get_status?format=json"> /get_status</a>
+    <b>ENDPOINT:</b><a href="/get_domain_status?format=json"> /get_domain_status</a>
     <b>DESCRIPTION:</b> Get the header, status, and trustworthiness of a specfic domain url.
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
-    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/get_status?url=example.com
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/get_domain_status?url=example.com
 
 <pre id="inner-code"><code>
 {
@@ -91,9 +93,10 @@ Request the IP address, Headers, and Status Code of any website for micropayment
 
 </code></pre>
 
-    <b>ENDPOINT:</b><a href="/get_ip?format=json">/get_ip</a>
+    <b>ENDPOINT:</b><a href="/get_domain_ip?format=json"> /get_domain_ip</a>
+    <b>DESCRIPTION:</b> Get the origin IP address of a specific domain url.
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
-    $ 21 buy https://www.request402.com/get_ip?url=example.com
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/get_domain_ip?url=example.com
 
 <pre id="inner-code"><code>
 {
@@ -103,12 +106,12 @@ Request the IP address, Headers, and Status Code of any website for micropayment
     }
 }
 
-
 </code></pre>
 
-    <b>ENDPOINT:</b><a href="/1ip?format=json">/ip</a>
+    <b>ENDPOINT:</b><a href="/ip?format=json"> /ip</a>
+    <b>DESCRIPTION:</b> Get th origin of your IP address.
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
-    $ 21 buy https://www.request402.com/ip
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/ip
 
 <pre id="inner-code"><code>
 {

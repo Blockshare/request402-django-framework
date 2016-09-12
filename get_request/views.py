@@ -11,9 +11,11 @@ import socket
 import json
 import requests
 import urllib.request as my_request
+from random import randint
 
 def index(request):
-    return render(request, '../templates/index.html', status=200)
+    return render(request, '../templates/use_this_for_now.html', status=200)
+
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -30,7 +32,7 @@ def info(request):
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def get_status(request):
 
     # Get the website url and assign it to variable url. 
@@ -56,16 +58,16 @@ def get_status(request):
 
 # Get the IP address of a website. Output in JSON
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def get_ip(request):
     
     # grab the url for the IP address.    
-    url = request.GET.get('uri')
+    url = request.GET.get('url')
     
     # Assign url and IP to variables and return them as JSON-encoded output.
     try:
         response = socket.gethostbyname(url)
-        message = {'ip_info': {'origin': response, 'url': url}}
+        message = {'domain_ip': {'origin': response, 'url': url}}
         data = json.dumps(message, indent=2)
         return HttpResponse(data, status=200)
     except:
@@ -77,7 +79,7 @@ def get_ip(request):
 
 # Get the IP address of user. Output in JSON
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def ip(request):
     
     # IP address information from Django's 'request.META.get' command.
@@ -97,7 +99,7 @@ def ip(request):
 
 # Returns the GET Header data. Output is JSON
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def get(request):
 
     # Grab and arguments as a string.
@@ -129,7 +131,7 @@ def get(request):
 
 # Get JSON-encoded output of a Bitcoin wallet address
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def address(request):
 
     # Assign a wallet address to a variable, place in API url, and return as JSON.
@@ -159,7 +161,7 @@ def address(request):
 
 # Output all JSON-encoded IP information.    
 @api_view(['GET'])
-@payment.required(2500)
+@payment.required(100)
 def server_info(request):
     
     # Grab and assign URL information to JSON-encoded file.
@@ -188,7 +190,7 @@ def server_info(request):
 
 
 @api_view(['GET'])
-@payment.required(5)
+@payment.required(100)
 def company_information(request):
 
     company = request.GET.get('url')
