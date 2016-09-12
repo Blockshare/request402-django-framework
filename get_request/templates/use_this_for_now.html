@@ -109,13 +109,32 @@ Request the IP address, Headers, and Status Code of any website for micropayment
 </code></pre>
 
     <b>ENDPOINT:</b><a href="/ip?format=json"> /ip</a>
-    <b>DESCRIPTION:</b> Get th origin of your IP address.
+    <b>DESCRIPTION:</b> Get the origin of your IP address.
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
     <b>PURCHASE:</b> $ 21 buy https://www.request402.com/ip
 
 <pre id="inner-code"><code>
 {
     "origin": xxx.xxx.x.xx
+}
+
+</code></pre>
+
+    <b>ENDPOINT:</b><a href="/get?format=json"> /get</a>
+    <b>DESCRIPTION:</b> Return GET data.
+    <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/get
+
+<pre id="inner-code"><code>
+{
+    "headers": {
+        "args": null,
+        "User-Agent": "xxxxxx",
+        "HTTP-Host": "www.xxxxxx.com",
+        "Accept": "*/*",
+        "Encoding": "gzip"
+    },
+    "origin": "xxx.xxx.xx.xxx"
 }
 
 </code></pre>
