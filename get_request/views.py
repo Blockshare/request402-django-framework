@@ -14,8 +14,8 @@ import urllib.request as my_request
 
 
 def index(request):
-    #return render(request, '../templates/use_this_for_now.html', status=200)
-    return render(request, '../templates/index.html', status=200)
+    return render(request, '../templates/use_this_for_now.html', status=200)
+    #return render(request, '../templates/index.html', status=200)
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -125,8 +125,9 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
+        get_args = lambda x: {x} if len(x) >= 1 else {}
         response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
-                    'HTTP-Host': host, 'args': args}, 'origin': origin}
+                    'HTTP-Host': host, 'args': get_args(args)}, 'origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
