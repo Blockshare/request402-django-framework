@@ -111,7 +111,6 @@ def get(request):
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
-    get_args = lambda x: {x} if len(x) >= 1 else {}
 
     # Assign Header information to variables and return as JSON-encoded output.
     try:
@@ -121,7 +120,7 @@ def get(request):
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
         response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
-                    'HTTP-Host': host, 'args': get_args(args)}, 'origin': origin}
+                    'HTTP-Host': host, 'args': args}, 'origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
