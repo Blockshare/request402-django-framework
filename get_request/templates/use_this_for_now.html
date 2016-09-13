@@ -128,7 +128,7 @@ Request the IP address, Headers, and Status Code of any website for micropayment
 <pre id="inner-code"><code>
 {
     "headers": {
-        "args": null,
+        "args": {},
         "User-Agent": "xxxxxx",
         "HTTP-Host": "www.xxxxxx.com",
         "Accept": "*/*",
@@ -138,6 +138,33 @@ Request the IP address, Headers, and Status Code of any website for micropayment
 }
 
 </code></pre>
+
+    <b>ENDPOINT:</b><a href="/server-location?format=json"> /server-location</a>
+    <b>DESCRIPTION:</b> Return header and server location data.
+    <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/server-location
+
+<pre id="inner-code"><code>
+{
+    "headers": {
+        "encoding": "gzip",
+        "accept": "*/*",
+        "User-Agent": "xxxxxx"
+    },
+    "server": {
+        "loc": "xx,xx",
+        "ip": "xx.xx.xx.xxx",
+        "city": "Ashburn",
+        "org": "AS14618 Amazon.com, Inc.",
+        "hostname": "ec2.x.x.x.xxx",
+        "region": "Virginia",
+        "postal": "20149",
+        "country": "US"
+    }
+}
+
+</code></pre>
+
 </center>                                                                                                                               
 </body>
 

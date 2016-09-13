@@ -11,11 +11,11 @@ import socket
 import json
 import requests
 import urllib.request as my_request
-from random import randint
+
 
 def index(request):
+    #return render(request, '../templates/use_this_for_now.html', status=200)
     return render(request, '../templates/index.html', status=200)
-
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -105,6 +105,12 @@ def get(request):
     # Grab and arguments as a string.
     args = request.GET.get('args')
 
+    # try something like this for args.
+    # it might work in the exception handler.
+    # args = 'Hello World'
+    # get_args = lambda x: {x} if len(x) >= 1 else {}
+    # get_args(args) => {'Hello World'}
+
     # Grab Header information using Djangos request.META.get command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
@@ -192,9 +198,40 @@ def server_info(request):
 @api_view(['GET'])
 @payment.required(100)
 def company_information(request):
-
+    
+    # Add exception handlers to this function in case data is not correct.
     company = request.GET.get('url')
 
     response = requests.get('https://api.fullcontact.com/v2/company/lookup.json?domain='+company+'&apiKey='+FULLCONTACT_API)
+    response = response.json()
 
-    return HttpResponse(response, status=200)        
+    params = {
+        'company-information': {
+            'founded': response['organization']['founded'],
+            'contact': response['organization']['contactInfo'],
+        }
+    }
+
+    return HttpResponse(json.dumps(params, indent=2), status=200)        
+
+
+@api_view(['GET'])
+@payment.required(100)
+def twitter_search(request):
+
+    # Add exception hanlding before this code goes live to production.
+
+    username = request.GET.get('username')
+
+    response = requests.get('https://api.fullcontact.com/v2/person.json?twitter='+username+'&apiKey='+FULLCONTACT_API)
+    response = response.json()
+
+    params = {
+        'user_info': {
+            'demographics': response['demographics'],
+            'social_profiles': response['socialProfiles']
+        }
+    }
+
+
+    return HttpResponse(json.dumps(params, indent=2), status=200)
