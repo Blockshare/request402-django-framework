@@ -105,18 +105,13 @@ def get(request):
     # Grab and arguments as a string.
     args = request.GET.get('args')
 
-    # try something like this for args.
-    # it might work in the exception handler.
-    # args = 'Hello World'
-    # get_args = lambda x: {x} if len(x) >= 1 else {}
-    # get_args(args) => {'Hello World'}
-
     # Grab Header information using Djangos request.META.get command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
+    get_args = lambda x: {x} if len(x) >= 1 else {}
 
     # Assign Header information to variables and return as JSON-encoded output.
     try:
@@ -125,7 +120,6 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
-        get_args = lambda x: {x} if len(x) >= 1 else {}
         response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent, \
                     'HTTP-Host': host, 'args': get_args(args)}, 'origin': origin}
         return HttpResponse(json.dumps(response, indent=2), status=200)
