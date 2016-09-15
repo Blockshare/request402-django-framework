@@ -11,6 +11,7 @@ import socket
 import json
 import requests
 import urllib.request as my_request
+import ssl
 
 
 def index(request):
@@ -193,39 +194,58 @@ def server_info(request):
 @payment.required(100)
 def company_information(request):
     
-    # Add exception handlers to this function in case data is not correct.
     company = request.GET.get('url')
 
     response = requests.get('https://api.fullcontact.com/v2/company/lookup.json?domain='+company+'&apiKey='+FULLCONTACT_API)
     response = response.json()
 
-    params = {
-        'company-information': {
-            'founded': response['organization']['founded'],
-            'contact': response['organization']['contactInfo'],
+    # Using exception handlers
+    try:
+        params = {
+            'company-information': {
+                'founded': response['organization']['founded'],
+                'contact': response['organization']['contactInfo'],
+            }
         }
-    }
-
-    return HttpResponse(json.dumps(params, indent=2), status=200)        
+        return HttpResponse(json.dumps(params, indent=2), status=200)        
+    except:
+        params = {"Exception Error": "It appears something broke in the code."}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
 @api_view(['GET'])
 @payment.required(100)
 def twitter_search(request):
 
-    # Add exception hanlding before this code goes live to production.
-
     username = request.GET.get('username')
 
     response = requests.get('https://api.fullcontact.com/v2/person.json?twitter='+username+'&apiKey='+FULLCONTACT_API)
     response = response.json()
 
-    params = {
-        'user_info': {
-            'demographics': response['demographics'],
-            'social_profiles': response['socialProfiles']
+    # Using exception handlers to handle logic.
+    try:
+        params = {
+            'user_info': {
+                'demographics': response['demographics'],
+                'social_profiles': response['socialProfiles']
+            }
         }
-    }
+        return HttpResponse(json.dumps(params, indent=2), status=200)
+    except:
+        params = {"Exception Error": "It appears something broke in the code."}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
-    return HttpResponse(json.dumps(params, indent=2), status=200)
+@api_view(['GET'])
+@payment.required(1000)
+def get_ssl(request):
+
+    url = request.GET.get('url')
+
+
+    ssl_cert = ssl.get_server_certificate((url, 443))
+
+    try:
+        return HttpResponse("\n"+ssl_cert, status=200)
+    except:
+        return HttpResponse(("There doesn't seem to be a SSL certificate for %s." % url), status=200)

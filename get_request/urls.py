@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^server-location$', get_request.views.server_info),
     url(r'^company-contact$', get_request.views.company_information),
     url(r'^twitter$', get_request.views.twitter_search),
+    url(r'^ssl-cert$', get_request.views.get_ssl),
 ]
