@@ -50,7 +50,7 @@ SECRET_KEY = 'a5sk!^j5c)i3z^0sqfyz3q+4d%sw4-n07vtr84lb)7ja&9t_km'
 DEBUG = os.environ.get("DEBUG", "False").lower() in ['true', '1', 't']
 
 ALLOWED_HOSTS = [
-    'request402.herkouapp.com'
+    'request402.com.herokudns.com'
 ]
 
 
