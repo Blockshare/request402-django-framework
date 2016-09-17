@@ -89,11 +89,11 @@ def ip(request):
     try:
         ip = x_forwarded_for.split(',')[0]
         message = {'origin': ip}
-        return HttpResponse("Payment Required", json.dumps(message, indent=2), status=200)
+        return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
         ip = request.META.get('REMOTE_ADDR')
         message = {'origin': ip}
-        return HttpsResponse("Payment Required", json.dumps(message, indent=2), status=200)
+        return HttpsResponse(json.dumps(message, indent=2), status=200)
 
 
 
