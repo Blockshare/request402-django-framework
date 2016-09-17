@@ -51,7 +51,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'request402.herokuapp.com'
-    'www.request402.com'
+    'https://www.request402.com'
 ]
 
 
