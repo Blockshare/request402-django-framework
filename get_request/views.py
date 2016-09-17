@@ -93,7 +93,7 @@ def ip(request):
     except:
         ip = request.META.get('REMOTE_ADDR')
         message = {'origin': ip}
-        return render("Payment Required", json.dumps(message, indent=2), status=200)
+        return HttpsResponse("Payment Required", json.dumps(message, indent=2), status=200)
 
 
 
