@@ -19,7 +19,6 @@ from two1.bitrequests import BitTransferRequests
 from two1.commands.config import Config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # load environment variables from .env
 dotenv_file = os.path.join(BASE_DIR, ".env")
@@ -82,7 +81,7 @@ ROOT_URLCONF = 'get_request.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(PACKAGE_ROOT, 'template')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
