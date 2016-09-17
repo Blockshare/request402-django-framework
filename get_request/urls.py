@@ -17,7 +17,7 @@ from django.contrib import admin
 import get_request.views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    #url(r'^admin/', include(admin.site.urls)),
     url(r'^$', get_request.views.index),
     url(r'^info$', get_request.views.info),
     url(r'^domain_status$', get_request.views.get_status),
