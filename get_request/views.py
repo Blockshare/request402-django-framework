@@ -7,16 +7,16 @@ from two1.bitserv.django import payment
 from get_request.settings import CERTLY_API
 from get_request.settings import FULLCONTACT_API
 
-import socket
+import ssl, socket
+import OpenSSL
 import json
 import requests
 import urllib.request as my_request
-import ssl
 
 
 def index(request):
-    #return render(request, '../templates/use_this_for_now.html', status=200)
-    return render(request, '../templates/index.html', status=200)
+    return render(request, '../templates/use_this_for_now.html', status=200)
+    #return render(request, '../templates/index.html', status=200)
 
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
@@ -241,11 +241,11 @@ def twitter_search(request):
 def get_ssl(request):
 
     url = request.GET.get('url')
-
-
     ssl_cert = ssl.get_server_certificate((url, 443))
 
     try:
         return HttpResponse("\n"+ssl_cert, status=200)
     except:
-        return HttpResponse(("There doesn't seem to be a SSL certificate for %s." % url), status=200)
+        return HttpResponse(("There doesn't seem to be a SSL certificate for the URL you provided."), status=200)
+
+
