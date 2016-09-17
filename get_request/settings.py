@@ -51,8 +51,7 @@ DEBUG = os.environ.get("DEBUG", "False").lower() in ['true', '1', 't']
 
 ALLOWED_HOSTS = [
     'request402.herokuapp.com',
-    'www.request402.com',
-    'www.request402.com/ip'
+    'www.request402.com'
 ]
 
 
