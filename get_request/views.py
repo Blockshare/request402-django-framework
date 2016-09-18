@@ -33,7 +33,7 @@ def info(request):
 
 # Get the header and status code from a website. Output in JSON.
 @api_view(['GET'])
-@payment.required(100)
+#@payment.required(100)
 def get_status(request):
 
     # Get the website url and assign it to variable url. 
