@@ -27,7 +27,7 @@ def info(request):
     get_get = 'Returns GET data: 21 buy https://www.request402.org/get'
     get_ipinfo = 'Returns origin IP data: 21 buy https://www.request402.org/ipinfo'
     get_ssl_cert = "Returns the public key of an HTTPS enabled website\n"
-    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s\n" \
+    return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s%s\n" \
                          % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_ssl_cert, get_info_border), status=200)
 
 
