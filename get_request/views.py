@@ -8,7 +8,6 @@ from get_request.settings import CERTLY_API
 from get_request.settings import FULLCONTACT_API
 
 import ssl, socket
-import OpenSSL
 import json
 import requests
 import urllib.request as my_request
@@ -26,9 +25,10 @@ def info(request):
     get_status_info = '\nAll endpoints cost 2500 satoshi. \nReturns a websites HTTP status: 21 buy https://www.request402.org/get_status?uri=example.com\n'
     get_ip_info = 'Returns a websites IP: 21 buy https://www.request402.org/get_ip?uri=example.com\n'
     get_get = 'Returns GET data: 21 buy https://www.request402.org/get'
-    get_ipinfo = 'Returns origin IP data: 21 buy https://www.request402.org/ipinfo\n'
+    get_ipinfo = 'Returns origin IP data: 21 buy https://www.request402.org/ipinfo'
+    get_ssl_cert = "Returns the public key of an HTTPS enabled website\n"
     return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s\n" \
-                         % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_info_border), status=200)
+                         % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_ssl_cert, get_info_border), status=200)
 
 
 # Get the header and status code from a website. Output in JSON.
