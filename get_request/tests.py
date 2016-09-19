@@ -13,22 +13,38 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/info')
         self.assertEqual(resp.status_code, 200)
 
-    def test_get_status(self):
-        resp = self.client.get('/get_status?uri=google.com')
+    def test_domain_status(self):
+        resp = self.client.get('/domain_status?uri=google.com')
         self.assertEqual(resp.status_code, 402)
 
-    def test_get_ip(self):
-        resp = self.client.get('/get_ip?uri=google.com')
+    def test_domain_ip(self):
+        resp = self.client.get('/domain_ip?uri=google.com')
         self.assertEqual(resp.status_code, 402)
 
     def test_ip(self):
         resp = self.client.get('/ip')
         self.assertEqual(resp.status_code, 402)
 
+    def test_get(self):
+        resp = self.client.get('/get')
+        self.assertEqual(resp.status_code, 402)
+
     def test_btc_address(self):
         resp = self.client.get('/bitcoin?address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa')
         self.assertEqual(resp.status_code, 402)
 
-    def test_ipinfo(self):
-        resp = self.client.get('/ipinfo')
+    def test_server_location(self):
+        resp = self.client.get('/server-location')
+        self.assertEqual(resp.status_code, 402)
+
+    def test_company_contact(self):
+        resp = self.client.get('/company-contact')
+        self.assertEqual(resp.status_code, 402)
+
+    def test_twitter_acct(self):
+        resp = self.client.get('/twitter')
+        self.assertEqual(resp.status_code, 402)
+
+    def test_ssl_cert(self):
+        resp = self.client.get('/ssl-cert')
         self.assertEqual(resp.status_code, 402)
