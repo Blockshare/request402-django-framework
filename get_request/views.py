@@ -31,7 +31,7 @@ def info(request):
                          % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_ssl_cert, get_info_border), status=200)
 
 
-# Get the header and status code from a website. Output in JSON.
+# Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
 @payment.required(100)
 def get_status(request):
@@ -57,7 +57,7 @@ def get_status(request):
 
 
 
-# Get the IP address of a website. Output in JSON
+# Get JSON-encoded IP address of a website.
 @api_view(['GET'])
 @payment.required(100)
 def get_ip(request):
@@ -78,7 +78,7 @@ def get_ip(request):
 
 
 
-# Get the IP address of user. Output in JSON
+# Get JSON-encoded IP address of user.
 @api_view(['GET'])
 @payment.required(100)
 def ip(request):
@@ -98,7 +98,7 @@ def ip(request):
 
 
 
-# Returns the GET Header data. Output is JSON
+# Returns JSON-encoded GET Header data.
 @api_view(['GET'])
 @payment.required(100)
 def get(request):
@@ -130,7 +130,7 @@ def get(request):
 
 
 
-# Get JSON-encoded output of a Bitcoin wallet address
+# Get JSON-encoded output of a Bitcoin wallet address.
 @api_view(['GET'])
 @payment.required(100)
 def address(request):
@@ -138,7 +138,6 @@ def address(request):
     # Assign a wallet address to a variable, place in API url, and return as JSON.
     addr = request.GET.get('address')
     response = requests.get('https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
-    
     data = response.json()
 
     # Assign JSON output to variables.
@@ -154,13 +153,13 @@ def address(request):
                         'total_received': total_rec, 'total_sent': total_sent}, 'address': address}
         return HttpResponse(json.dumps(address_json, indent=2), status=200)
     except:
-        exception = {"Exception": "%s may not be a proper bitcoin address" % (address)}
+        exception = {"exception": "%s may not be a proper bitcoin address" % (address)}
         return HttpResponse(json.dumps(exception))
 
 
 
 
-# Output all JSON-encoded IP information.    
+# Output all JSON-encoded server location information.    
 @api_view(['GET'])
 @payment.required(100)
 def server_info(request):
@@ -189,17 +188,17 @@ def server_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-
+# Get JSON-encoded output of company contact information from url.
 @api_view(['GET'])
 @payment.required(100)
 def company_information(request):
     
+    # Get url and assign to 'response' variable and output as JSON.
     company = request.GET.get('url')
-
     response = requests.get('https://api.fullcontact.com/v2/company/lookup.json?domain='+company+'&apiKey='+FULLCONTACT_API)
     response = response.json()
 
-    # Using exception handlers
+    # Assign variable output to new JSON dict and return params. Break if there is an error.
     try:
         params = {
             'company-information': {
@@ -209,20 +208,21 @@ def company_information(request):
         }
         return HttpResponse(json.dumps(params, indent=2), status=200)        
     except:
-        params = {"Exception Error": "It appears something broke in the code."}
+        params = {"exception error": "it appears something broke in the code."}
         return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
+# Get JSON-encoded output of twitter username search.
 @api_view(['GET'])
 @payment.required(100)
 def twitter_search(request):
 
+    # Get username, assign to variable, call 'fullcontact' api, and return json.
     username = request.GET.get('username')
-
     response = requests.get('https://api.fullcontact.com/v2/person.json?twitter='+username+'&apiKey='+FULLCONTACT_API)
     response = response.json()
 
-    # Using exception handlers to handle logic.
+    # Assign variable output to new JSON dict and return params. Break if there is an error.
     try:
         params = {
             'user_info': {
@@ -236,13 +236,16 @@ def twitter_search(request):
         return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
+# Get the public key of an URL's SSL certificate.
 @api_view(['GET'])
 @payment.required(1000)
 def get_ssl(request):
 
+    # Get url and assign to variable that is fetching whether or not there is a SSL certificate for that url.
     url = request.GET.get('url')
     ssl_cert = ssl.get_server_certificate((url, 443))
 
+    # Return public key SSL certificate if it is available. Break if there is an error.
     try:
         return HttpResponse("\n"+ssl_cert, status=200)
     except:
