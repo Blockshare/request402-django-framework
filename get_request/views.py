@@ -17,6 +17,10 @@ def index(request):
     #return render(request, '../templates/use_this_for_now.html', status=200)
     return render(request, '../templates/index.html', status=200)
 
+def info(request):
+    return render(request, '../templates/info.txt', status=200)
+
+"""
 # General overview of how the app can be used with instructions on how to provide the correct URL.
 @api_view(['GET'])
 @payment.required(0)
@@ -29,7 +33,7 @@ def info(request):
     get_ssl_cert = "Returns the public key of an HTTPS enabled website\n"
     return HttpResponse("%s\nYou can easily use request402 by running any of the following commands:\n %s%s%s\n%s%s%s\n" \
                          % (get_info_border, get_status_info, get_ip_info, get_get, get_ipinfo, get_ssl_cert, get_info_border), status=200)
-
+"""
 
 # Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
