@@ -51,50 +51,50 @@
     ul {list-style: None; margin-left: 1em!important}
     .man-navigation {left:101ex}
   </style>
-<body id="manpage">
-<center><pre><img src="//machine-payable.herokuapp.com/static/img/abstractdot.ico" style="width=auto; height=auto; max-width: 150px; max-height: 200px">
+  <body id="manpage">
+  <center><pre><img src="//machine-payable.herokuapp.com/static/img/abstractdot.ico" style="width=auto; height=auto; max-width: 150px; max-height: 200px">
 
-______                           _     ___ _____  _____ 
-| ___ \                         | |   /   |  _  |/ __  \
-| |_/ /___  __ _ _   _  ___  ___| |_ / /| | |/' |`' / /'
-|    // _ \/ _` | | | |/ _ \/ __| __/ /_| |  /| |  / /  
-| |\ \  __/ (_| | |_| |  __/\__ \ |_\___  \ |_/ /./ /___
-\_| \_\___|\__, |\__,_|\___||___/\__|   |_/\___/ \_____/
+  ______                           _     ___ _____  _____ 
+  | ___ \                         | |   /   |  _  |/ __  \
+  | |_/ /___  __ _ _   _  ___  ___| |_ / /| | |/' |`' / /'
+  |    // _ \/ _` | | | |/ _ \/ __| __/ /_| |  /| |  / /  
+  | |\ \  __/ (_| | |_| |  __/\__ \ |_\___  \ |_/ /./ /___
+  \_| \_\___|\__, |\__,_|\___||___/\__|   |_/\___/ \_____/
               | |                                       
              |_|                                      
 
-<h2>HTTP(S) Request & Response Micropayments Service</h2>
-Request the IP address, Headers, and Status Code of any website for micropayments.
-</img>
-<div class="mp">
-<center><h2><p>Hosted in <a href="http://www.request402.com">HTTP</a> + <a href="https://www.request402.com">HTTPS</a></h2></center>
-<h2>Basic Requirements:</h2>
-   1. A  <a href="https://21.co">21 Bitcoin Computer</a> or 21 installed.
-   2. You will need to be connected the 21 Zerotier Marketplace.
+  <h2>HTTP(S) Request & Response Micropayments Service</h2>
+  Request the IP address, Headers, and Status Code of any website for micropayments.
+  </img>
+  <div class="mp">
+  <center><h2><p>Hosted in <a href="http://www.request402.com">HTTP</a> + <a href="https://www.request402.com">HTTPS</a></h2></center>
+  <h2>Basic Requirements:</h2>
+    1. A  <a href="https://21.co">21 Bitcoin Computer</a> or 21 installed.
+    2. You will need to be connected the 21 Zerotier Marketplace.
 
-<h2>How to use:</h2>
+  <h2>How to use:</h2>
     <b>ENDPOINT:</b><a href="/domain_status?format=json"> /get_domain_status</a>
     <b>DESCRIPTION:</b> Get the header, status, and trustworthiness of a specfic domain url.
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
     <b>PURCHASE:</b> $ 21 buy https://www.request402.com/get_domain_status?url=example.com
 
-<pre id="inner-code"><code>
-{
-    "headers": {
-        "Content-Type": "text/html; charset=utf-8",
-        "Date": "Fri, 26 Aug 2016 22:27:32 GMT",
-        "Transfer-Encoding": "chunked",
-        "Connection": "close",
-        "Server": "Apache",
-        "Content-Security-Policy": "referrer no-referrer;"
-    },
-    "status": {
-        "trust": "clean",
-        "200": "OK"
-    }
-}
+  <pre id="inner-code"><code>
+  {
+      "headers": {
+         "Content-Type": "text/html; charset=utf-8",
+         "Date": "Fri, 26 Aug 2016 22:27:32 GMT",
+         "Transfer-Encoding": "chunked",
+         "Connection": "close",
+         "Server": "Apache",
+         "Content-Security-Policy": "referrer no-referrer;"
+     },
+     "status": {
+         "trust": "clean",
+         "200": "OK"
+     }
+  }
 
-</code></pre>
+  </code></pre>
 
     <b>ENDPOINT:</b><a href="/domain_ip?format=json"> /get_domain_ip</a>
     <b>DESCRIPTION:</b> Get the origin IP address of a specific domain url.
