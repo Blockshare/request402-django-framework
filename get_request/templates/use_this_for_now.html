@@ -217,6 +217,62 @@
     }    
   </code></pre>
 
+    <b>ENDPOINT:</b><a href="/twitter?format=json"> /twitter</a>
+    <b>DESCRIPTION:</b> Return demographic and social media account information of a Twitter username.
+    <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/twitter?username=example-username
+
+  <pre id="inner-code"><pre>
+
+    {
+      "user_info": {
+        "social_profiles": [
+            {
+                "following": ***,
+                "url": "***",
+                "typeName": "***",
+                "followers": ***,
+                "username": "***",
+                "id": "***",
+                "bio": "***",
+                "type": "twitter",
+                "typeId": "twitter"
+            },
+        ],
+        "demographics": {
+            "locationDeduced": {
+                "normalizedLocation": "***",
+                "city": {
+                    "name": "***"
+                },
+                "state": {
+                    "name": "***",
+                    "code": "***"
+                },
+                "county": {
+                    "name": "***",
+                    "code": "***",
+                    "deduced": true
+                },
+                "continent": {
+                    "name": "***",
+                    "deduced": **
+                },
+                "deducedLocation": "***",
+                "country": {
+                    "name": "***",
+                    "code": "**",
+                    "deduced": **
+                },
+                "likelihood": **.*
+            },
+            "gender": "**",
+            "locationGeneral": "***"
+          }
+       }
+    }
+  </code></pre>
+
   </center>                                                                                                                               
   </body>
 </html>
