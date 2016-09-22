@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.http import StreamingHttpResponse
 
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
@@ -17,8 +18,15 @@ def index(request):
     #return render(request, '../templates/use_this_for_now.html', status=200)
     return render(request, '../templates/index.html', status=200)
 
+@csrf_exempt
 def info(request):
-    return render(request, '../templates/info.txt', status=200)
+    content = open('../templates/info.txt', 'r').read()
+    response = StreamingHttpResponse(content)
+    response['content-type'] = 'text/plain; charset=utf-8'
+    return response
+
+#def info(request):
+    #return render(request, '../templates/info.txt', status=200)
 
 # Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
