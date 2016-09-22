@@ -1,4 +1,4 @@
-# request402:
+# Request402:
 HTTP Request & Response Micropayments Service
 ===========================================
 ![Blockshare](https://machine-payable.herokuapp.com/static/img/abstractdot.ico)
