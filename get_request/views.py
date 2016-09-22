@@ -18,15 +18,8 @@ def index(request):
     #return render(request, '../templates/use_this_for_now.html', status=200)
     return render(request, '../templates/index.html', status=200)
 
-@csrf_exempt
 def info(request):
-    content = open('../templates/info.txt', 'r').read()
-    response = StreamingHttpResponse(content)
-    response['content-type'] = 'text/plain; charset=utf-8'
-    return response
-
-#def info(request):
-    #return render(request, '../templates/info.txt', status=200)
+    return render(request, '../templates/info.txt', status=200)
 
 # Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
