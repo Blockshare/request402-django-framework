@@ -19,7 +19,7 @@ def index(request):
     return render(request, '../templates/index.html', status=200)
 
 def info(request):
-    return render(request, '../templates/info.txt', status=200)
+    return render(request, '../templates/info.html', status=200)
 
 # Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
