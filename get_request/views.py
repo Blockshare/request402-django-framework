@@ -103,6 +103,7 @@ def get(request):
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
     
+    args = lambda x: {x} if len(x) >= 1 else {}
     # Assign Header information to variables and return as JSON-encoded output.
     try:
         origin = x_forwarded_for.split(',')[0]
