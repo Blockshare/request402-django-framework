@@ -64,13 +64,15 @@
              |_|                                      
 
   <h2>HTTP(S) Request & Response Micropayments Service</h2>
-  Request the IP address, Headers, and Status Code of any website for micropayments.
   </img>
+  Hosted in <a href="http://www.request402.com">HTTP</a> + <a href="https://www.request402.com">HTTPS</a>
+  Run curl <a href="/info">/info</a> for text instructions on the command line.
+  Created & maintained by <a href="//www.twitter.com/cponeill">cponeill</a>
   <div class="mp">
-  <center><h2><p>Hosted in <a href="http://www.request402.com">HTTP</a> + <a href="https://www.request402.com">HTTPS</a></h2></center>
   <h2>Basic Requirements:</h2>
     1. A  <a href="https://21.co">21 Bitcoin Computer</a> or 21 installed.
     2. You will need to be connected the 21 Zerotier Marketplace.
+    3. Make sure you have mined or have enough satoshi in your wallet for transactions.
 
   <h2>How to use:</h2>
     <b>ENDPOINT:</b><a href="/ip?format=json"> /ip</a>
@@ -82,7 +84,6 @@
   {
     "origin": xxx.xxx.x.xx
   }
-
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/get?format=json"> /get</a>
@@ -101,7 +102,6 @@
     },
     "origin": "xxx.xxx.xx.xxx"
   }
-
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/server-location?format=json"> /server-location</a>
@@ -127,7 +127,6 @@
         "country": "US"
     }
   }
-
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/domain_status?format=json"> /get_domain_status</a>
@@ -150,7 +149,6 @@
          "200": "OK"
      }
   }
-
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/domain_ip?format=json"> /get_domain_ip</a>
@@ -174,15 +172,12 @@
     <b>PURCHASE:</b> $ 21 buy https://www.request402.com/ssl-cert?url=example.com
 
   <pre id="inner-code"><code>
-
   -----BEGIN CERTIFICATE-----
    MIIF8jCCBNqgAwIBAgIQDmTF+8I2reFLFyrrQceMsDANBgkqhkiG9w0BAQsFADBw
   *
   *
   *
   -----END CERTIFICATE-----
- 
-
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/company-contact?format=json"> /company-contact</a>
@@ -191,7 +186,6 @@
     <b>PURCHASE:</b> $ 21 buy https://www.request402.com/company-contact?url=example.com
 
   <pre id="inner-code"><code>
-
     {
       "company-information": {
         "founded": "***",
@@ -222,8 +216,7 @@
     <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
     <b>PURCHASE:</b> $ 21 buy https://www.request402.com/twitter?username=example-username
 
-  <pre id="inner-code"><pre>
-
+  <pre id="inner-code"><code>
     {
       "user_info": {
         "social_profiles": [
@@ -271,6 +264,23 @@
           }
        }
     }
+  </code></pre>
+
+    <b>ENDPOINT:</b><a href="/bitcoin?format=json"> /bitcoin</a>
+    <b>DESCRIPTION:</b> Return Bitcoin wallet data.
+    <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/bitcoin?address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+
+  <pre id="inner-code"><code>
+  {
+    "Bitcoin": {
+        "balance": 16.31927487,
+        "total_sent": 0.0,
+        "final_balance": 16.31927487,
+        "total_received": 16.31927487
+    },
+    "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+  }
   </code></pre>
 
   </center>                                                                                                                               
