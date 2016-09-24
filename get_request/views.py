@@ -15,8 +15,8 @@ import urllib.request as my_request
 
 
 def index(request):
-    return render(request, '../templates/use_this_for_now.html', status=200)
-    #return render(request, '../templates/index.html', status=200)
+    #return render(request, '../templates/use_this_for_now.html', status=200)
+    return render(request, '../templates/index.html', status=200)
 
 def info(request):
     return render(request, '../templates/info.html', status=200)
