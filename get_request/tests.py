@@ -9,6 +9,10 @@ from django.test import TestCase
 
 
 class SimpleTestCase(TestCase):
+    def test_index(self):
+        resp = self.client.get('/')
+        self.assertEqual(resp.status_code, 200)
+
     def test_info(self):
         resp = self.client.get('/info')
         self.assertEqual(resp.status_code, 200)
