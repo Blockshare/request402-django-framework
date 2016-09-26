@@ -28,9 +28,4 @@ Quick Buy Links:
     $ 21 buy https://www.request402.com/bitcoin?address=<wallet address> --> Wallet Address Information
 
 
-<b>PURCHASE:</b> $ 21 buy https://www.request402.com/ip
-
-<pre><code>{
-    "origin": xxx.xxx.x.xx
-}
-</code></pre>
+More purchase information can be found at https://www.request402.com
