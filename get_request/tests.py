@@ -7,7 +7,8 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 
-
+# All of these are simple unittests for each endpoint in the web application.
+# Each test passes now but it is alwas good to check to make sure the endpoints are still working. 
 class SimpleTestCase(TestCase):
     def test_index(self):
         resp = self.client.get('/')
