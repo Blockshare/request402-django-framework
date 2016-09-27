@@ -5,10 +5,9 @@ HTTP Request & Response Micropayments Service
 
 HTTP(S) Request & Response Micropayments Service
 
-All endpoint responses are JSON-encoded and cost 2500 satoshis. This is about $0.015 at current exchange prices.
+All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572
 
 Full documentation can be found at https://www.request402.com
-
 A quick reference text can be found by running https://www.request402.com/info
 
 
