@@ -8,4 +8,4 @@ pyyaml==3.11
 hashids==1.1.0
 psycopg2==2.6.1
 pyopenssl==16.1.0
-two1==3.9.4
+two1==3.9.5
