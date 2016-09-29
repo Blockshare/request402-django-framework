@@ -14,7 +14,6 @@ import json
 import requests
 import urllib.request as my_request
 
-
 # Function that returns the landing home page.
 def index(request):
     return render(request, '../templates/index.html', status=200)
@@ -248,3 +247,27 @@ def get_ssl(request):
         return HttpResponse("\n" + ssl_cert, status=200)
     except:
         return HttpResponse(("There doesn't seem to be a SSL certificate for the URL you provided."), status=200)
+
+
+# Get the source of an SSL certificate.
+# Add comments code about this function.	
+@api_view(['GET'])
+@payment.required(2500)
+def get_ssl_source(request):
+
+    hostname = request.GET.get('url')
+
+    try:
+        ctx = ssl.create_default_context()
+        s = ctx.wrap_socket(socket.socket(), server_hostname=hostname)
+        s.connect((hostname, 443))
+        cert = s.getpeercert()
+        subject = dict(x[0] for x in cert['subject'])
+        issuer = dict(x[0] for x in cert['issuer'])
+        dns = [x[1] for x in cert['subjectAltName']]
+        subject_list = {'ssl-info': {'org-info': subject, 'serial-number': cert['serialNumber'], 'certificate': cert['caIssuers'][0], \
+                     'status-protocol': cert['OCSP'][0], 'dns': dns, 'issuer': issuer}}
+        return HttpResponse(json.dumps(subject_list, indent=2), status=200)
+    except:
+        exception = {'exception error': 'something went terribly wrong'}
+        return HttpResponse(json.dumps(exception, indent=2), status=200)
