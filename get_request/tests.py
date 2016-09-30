@@ -69,6 +69,6 @@ class SimpleTestCase(TestCase):
 
 
     def test_ssl_source(self):
-        resp = self.client.get('/ssl-source')
+        resp = self.client.get('/ssl')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
