@@ -269,5 +269,5 @@ def get_ssl_source(request):
                      'status-protocol': cert['OCSP'][0], 'dns': dns, 'issuer': issuer}}
         return HttpResponse(json.dumps(subject_list, indent=2), status=200)
     except:
-        exception = {'exception error': 'something went terribly wrong'}
+        exception = {'exception error': 'either the hostname is not HTTPS it was typed incorrectly.'}
         return HttpResponse(json.dumps(exception, indent=2), status=200)
