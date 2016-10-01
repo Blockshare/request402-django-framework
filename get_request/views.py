@@ -19,14 +19,10 @@ def index(request):
     return render(request, '../templates/index.html', status=200)
 
 # Function that returns the info landing page.
-
-
 def info(request):
     return render(request, '../templates/info.html', status=200)
 
 # Get JSON-encoded header and status code from a website.
-
-
 @api_view(['GET'])
 @payment.required(100)
 def get_status(request):
@@ -271,3 +267,7 @@ def get_ssl_source(request):
     except:
         exception = {'exception error': 'either the hostname is not HTTPS it was typed incorrectly.'}
         return HttpResponse(json.dumps(exception, indent=2), status=200)
+
+
+# New functions to add:
+# baddomain, bademail, badip

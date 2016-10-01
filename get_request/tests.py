@@ -72,3 +72,9 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/ssl')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
+
+    """
+    New tests to add:
+        baddomain, bademail, badip
+
+    """
