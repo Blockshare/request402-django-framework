@@ -9,4 +9,4 @@ install:
 env:
   - DJANGO_VERSION=1.8.0
 # command to run tests
-script: python manage test
+script: python manage.py test
