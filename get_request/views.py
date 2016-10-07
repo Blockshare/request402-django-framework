@@ -269,5 +269,16 @@ def get_ssl_source(request):
         return HttpResponse(json.dumps(exception, indent=2), status=200)
 
 
-# New functions to add:
-# baddomain, bademail, badip
+@api_view(['GET'])
+@payment.required(1000)
+def baddomain(request):
+    domain = request.GET.get('url')
+    headers = {'content-type': 'application/json'}
+
+    try:
+        response = requests.request("GET", 'http://api.moocher.io/baddomain/' + domain, headers=headers)
+        msg = {'baddomain-info': response.json()}
+        return HttpResponse(json.dumps(msg, indent=2), status=200)
+    except:
+        response = {'exception error': 'there seems to be something wrong with the request.'}
+        return HttpResponse(json.dumps(response, indent=2), status=200)

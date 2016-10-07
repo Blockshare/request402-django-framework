@@ -60,8 +60,8 @@
   |    // _ \/ _` | | | |/ _ \/ __| __/ /_| |  /| |  / /  
   | |\ \  __/ (_| | |_| |  __/\__ \ |_\___  \ |_/ /./ /___
   \_| \_\___|\__, |\__,_|\___||___/\__|   |_/\___/ \_____/
-              | |                                       
-             |_|                                      
+                | |                                       
+               |_|                                      
 
   <h2>HTTP(S) Request & Response Micropayments Service</h2>
   </img>
@@ -217,6 +217,61 @@
   *
   *
   -----END CERTIFICATE-----
+  </code></pre>
+
+    <b>ENDPOINT:</b><a href="/baddomain?format=json"> /baddomain</a>
+    <b>DESCRIPTION:</b> Return status of domain name and if it is on any blacklist
+    <b>COST:</b> 5 - 2500 satoshis | $0.00003 - $0.01572
+    <b>PURCHASE:</b> $ 21 buy https://www.request402.com/baddomain?url=example.com
+
+  <pre id="inner-code"><code>
+   {
+    "baddomain-info": {
+        "type": "baddomain",
+        "response": {
+            "source_ip": {
+                "is_quarantined": xx,
+                "score": x,
+                "geo": {},
+                "blacklist": []
+            },
+            "score": x,
+            "domain": {
+                "blacklist_mx": [],
+                "mx": [xxxxxx],
+                "blacklist_ns": [],
+                "ns": [
+                    "xxxxxx.com.",
+                    "xxxxxx.com."
+                ],
+                "score": x,
+                "blacklist": []
+            },
+            "ip": {
+                "is_quarantined": xx,
+                "score": x,
+                "geo": {
+                    "country": "xx",
+                    "continent": "xx",
+                    "city": "",
+                    "region": "",
+                    "longitude": xx.xxx,
+                    "latitude": xx.xxx,
+                    "postal": "",
+                    "as": {
+                        "name": "xxxxxx",
+                        "country": "xx",
+                        "asn": "xxxxxx",
+                        "networks": "['xx.xx.xxx.x/xx']"
+                    },
+                    "address": "xxx.xxx.xxx.xxx",
+                    "hostname": ""
+                },
+                "blacklist": []
+             }
+          }
+       }
+    }
   </code></pre>
 
     <b>ENDPOINT:</b><a href="/company-contact?format=json"> /company-contact</a>
