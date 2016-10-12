@@ -32,7 +32,6 @@ WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
 USERNAME = Config().username
 BIT_REQUESTS = BitTransferRequests(WALLET, USERNAME)
 
-CERTLY_API = os.environ.get("CERTLY_API")
 FULLCONTACT_API = os.environ.get("FULLCONTACT_API")
 
 # load database from the DATABASE_URL environment variable

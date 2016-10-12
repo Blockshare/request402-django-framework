@@ -5,7 +5,6 @@ from django.http import StreamingHttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 
-from get_request.settings import CERTLY_API
 from get_request.settings import FULLCONTACT_API
 
 import ssl

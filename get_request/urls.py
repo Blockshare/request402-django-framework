@@ -31,5 +31,5 @@ urlpatterns = [
     url(r'^ssl-cert$', get_request.views.get_ssl),
     url(r'^ssl$', get_request.views.get_ssl_source),
     url(r'^baddomain$', get_request.views.baddomain),
-    url(r'^ping$', get_request.views.ping),
+    #url(r'^ping$', get_request.views.ping),
 ]
