@@ -12,6 +12,9 @@ import ssl
 import socket
 import json
 import requests
+import shutil
+import subprocess
+import sys
 import urllib.request as my_request
 
 # Function that returns the landing home page.
@@ -31,14 +34,16 @@ def get_status(request):
     website_url = request.GET.get('url')
     url = 'http://' + website_url
 
-    certify = requests.get('https://api.certly.io/v1/lookup?url=' +
-                           url + '&token=' + CERTLY_API).json()['data'][0]['status']
+    headers = {'content-type': 'application/json'}
+    data = requests.request("GET", 'http://api.moocher.io/baddomain/' + website_url, headers=headers)
+    data_json = data.json()['response']['ip']['score']
+    clean = "clean" if data_json == 0 else "blacklist"
 
     # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
-        message = {'status': {response.status: response.reason, 'trust': certify}, 'headers': {headers[0][0]: headers[0][1],
+        message = {'status': {response.status: response.reason, 'is-trustworthy': clean}, 'headers': {headers[0][0]: headers[0][1],
                                                                                                headers[1][0]: headers[1][1], headers[2][0]: headers[2][1],
                                                                                                headers[3][0]: headers[3][1], headers[4][0]: headers[4][1],
                                                                                                headers[5][0]: headers[5][1]}}
@@ -282,3 +287,7 @@ def baddomain(request):
     except:
         response = {'exception error': 'there seems to be something wrong with the request.'}
         return HttpResponse(json.dumps(response, indent=2), status=200)
+
+"""
+Ping Function 10/14
+"""
