@@ -24,6 +24,16 @@ def index(request):
 def info(request):
     return render(request, '../templates/info.html', status=200)
 
+
+def get_moocher_baddomain_api(request):
+    """
+    Abstracting the moocher api call into its own function for simplicity.
+    returns JSON-encoded output of a 'baddomain'.
+    """
+    headers = {'content-type': 'application/json'}
+    response = requests.request("GET", 'http://api.moocher.io/baddomain/' + request, headers=headers)
+    return response.json()
+
 # Get JSON-encoded header and status code from a website.
 @api_view(['GET'])
 @payment.required(100)
@@ -33,19 +43,18 @@ def get_status(request):
     website_url = request.GET.get('url')
     url = 'http://' + website_url
 
-    headers = {'content-type': 'application/json'}
-    data = requests.request("GET", 'http://api.moocher.io/baddomain/' + website_url, headers=headers)
-    data_json = data.json()['response']['ip']['score']
-    clean = "clean" if data_json == 0 else "blacklist"
+    data = get_moocher_baddomain_api(website_url)
+    data_json = data['response']['ip']['score']
+    clean = "clean" if data_json == 0 else "blacklist" 
 
     # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
-        message = {'status': {response.status: response.reason, 'is-trustworthy': clean}, 'headers': {headers[0][0]: headers[0][1],
-                                                                                               headers[1][0]: headers[1][1], headers[2][0]: headers[2][1],
-                                                                                               headers[3][0]: headers[3][1], headers[4][0]: headers[4][1],
-                                                                                               headers[5][0]: headers[5][1]}}
+        message = {'status': {response.status: response.reason, 'is-trustworthy': clean},
+                   'headers': {headers[0][0]: headers[0][1], headers[1][0]: headers[1][1],
+                               headers[2][0]: headers[2][1], headers[3][0]: headers[3][1],
+                               headers[4][0]: headers[4][1], headers[5][0]: headers[5][1]}}
         return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
         exception = {"exception raised": "possibly %s doesn't exist" % (url)}
@@ -275,18 +284,39 @@ def get_ssl_source(request):
 
 @api_view(['GET'])
 @payment.required(1000)
-def baddomain(request):
+def get_blacklist(request):
+
     domain = request.GET.get('url')
-    headers = {'content-type': 'application/json'}
 
     try:
-        response = requests.request("GET", 'http://api.moocher.io/baddomain/' + domain, headers=headers)
-        msg = {'baddomain-info': response.json()}
+        response = get_moocher_baddomain_api(domain)
+        msg = {'baddomain-info': response}
         return HttpResponse(json.dumps(msg, indent=2), status=200)
     except:
         response = {'exception error': 'there seems to be something wrong with the request.'}
         return HttpResponse(json.dumps(response, indent=2), status=200)
 
-"""
-Ping Function 10/14
-"""
+
+@api_view(['GET'])
+@payment.required(5)
+def ping(request):
+
+    url = request.GET.get('url')
+
+    try:
+        out = subprocess.check_output(['ping', '-c', str(6),
+            '-s', str(64), '-W', str(3.0), str(url)]
+        ).decode('unicode_escape')
+    except subprocess.CalledProcessError:
+        raise ValueError("ping cannot be performed on url={}".format(url))
+    ping = [line for line in out.split('\n') if line != '']
+
+    ip = socket.gethostbyname(url)
+
+    info = {'ping-info': {'ping': ping,'ip': ip}}
+
+    try:
+        return HttpResponse(json.dumps(info, indent=2), status=200)
+    except:
+        exception = {'exception error': 'trace not working properly.'}
+        return HttpResponse(json.dumps(exception, indent=2), status=200)

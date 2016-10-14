@@ -30,6 +30,6 @@ urlpatterns = [
     url(r'^twitter$', get_request.views.twitter_search),
     url(r'^ssl-cert$', get_request.views.get_ssl),
     url(r'^ssl$', get_request.views.get_ssl_source),
-    url(r'^baddomain$', get_request.views.baddomain),
-    #url(r'^ping$', get_request.views.ping),
+    url(r'^blacklist$', get_request.views.get_blacklist),
+    url(r'^ping$', get_request.views.ping),
 ]
