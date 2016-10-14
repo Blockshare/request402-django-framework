@@ -297,6 +297,7 @@ def get_blacklist(request):
         return HttpResponse(json.dumps(response, indent=2), status=200)
 
 
+"""
 @api_view(['GET'])
 @payment.required(5)
 def ping(request):
@@ -320,3 +321,4 @@ def ping(request):
     except:
         exception = {'exception error': 'trace not working properly.'}
         return HttpResponse(json.dumps(exception, indent=2), status=200)
+"""

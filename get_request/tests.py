@@ -76,8 +76,9 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/blacklist?url=google.com')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
-
+    """
     def test_ping(self):
         resp = self.client.get('/ping')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
+    """
