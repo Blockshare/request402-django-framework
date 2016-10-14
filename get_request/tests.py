@@ -72,8 +72,8 @@ class SimpleTestCase(TestCase):
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
 
-    def test_baddomain(self):
-        resp = self.client.get('/baddomain?url=google.com')
+    def test_blacklist(self):
+        resp = self.client.get('/blacklist?url=google.com')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
 
