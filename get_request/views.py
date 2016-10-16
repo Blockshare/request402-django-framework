@@ -14,14 +14,21 @@ import requests
 import shutil
 import subprocess
 import sys
+import random
 import urllib.request as my_request
 
-# Function that returns the landing home page.
+
 def index(request):
+    """
+    Returns landing home page.
+    """
     return render(request, '../templates/index.html', status=200)
 
-# Function that returns the info landing page.
+
 def info(request):
+    """
+    Returns landing info page.
+    """
     return render(request, '../templates/info.html', status=200)
 
 
@@ -34,12 +41,24 @@ def get_moocher_baddomain_api(request):
     response = requests.request("GET", 'http://api.moocher.io/baddomain/' + request, headers=headers)
     return response.json()
 
-# Get JSON-encoded header and status code from a website.
-@api_view(['GET'])
-@payment.required(100)
-def get_status(request):
+def random_price():
+    """
+    Returns random price between 5 - 2500 satoshi.
+    To be replaced with surge pricing code in future updates.
+    """
+    for price in range(1):
+        return random.randrange(5, 2500)
+        
 
-    # Get the website url and assign it to variable url.
+@api_view(['GET'])
+@payment.required(random_price())
+def get_status(request):
+    """
+    Input: website url.
+    Output: JSON-encoded header and status code from url.
+            {'status': {'is-trustworthy': ___, 'status_code': ___}, 'headers': {___}}
+    Exception: Exception raised if url does not exist or is broken.
+    """
     website_url = request.GET.get('url')
     url = 'http://' + website_url
 
@@ -47,7 +66,6 @@ def get_status(request):
     data_json = data['response']['ip']['score']
     clean = "clean" if data_json == 0 else "blacklist" 
 
-    # Open url, get the status code and headers and assign each to json output.
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
@@ -63,7 +81,7 @@ def get_status(request):
 
 # Get JSON-encoded IP address of a website.
 @api_view(['GET'])
-@payment.required(100)
+@payment.required(random_price())
 def get_ip(request):
 
     # grab the url for the IP address.
@@ -295,30 +313,3 @@ def get_blacklist(request):
     except:
         response = {'exception error': 'there seems to be something wrong with the request.'}
         return HttpResponse(json.dumps(response, indent=2), status=200)
-
-
-"""
-@api_view(['GET'])
-@payment.required(5)
-def ping(request):
-
-    url = request.GET.get('url')
-
-    try:
-        out = subprocess.check_output(['ping', '-c', str(6),
-            '-s', str(64), '-W', str(3.0), str(url)]
-        ).decode('unicode_escape')
-    except subprocess.CalledProcessError:
-        raise ValueError("ping cannot be performed on url={}".format(url))
-    ping = [line for line in out.split('\n') if line != '']
-
-    ip = socket.gethostbyname(url)
-
-    info = {'ping-info': {'ping': ping,'ip': ip}}
-
-    try:
-        return HttpResponse(json.dumps(info, indent=2), status=200)
-    except:
-        exception = {'exception error': 'trace not working properly.'}
-        return HttpResponse(json.dumps(exception, indent=2), status=200)
-"""
