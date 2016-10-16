@@ -14,7 +14,6 @@ import requests
 import shutil
 import subprocess
 import sys
-import random
 import urllib.request as my_request
 
 
@@ -41,17 +40,9 @@ def get_moocher_baddomain_api(request):
     response = requests.request("GET", 'http://api.moocher.io/baddomain/' + request, headers=headers)
     return response.json()
 
-def random_price():
-    """
-    Returns random price between 5 - 2500 satoshi.
-    To be replaced with surge pricing code in future updates.
-    """
-    for price in range(1):
-        return random.randrange(5, 2500)
-        
 
 @api_view(['GET'])
-@payment.required(random_price())
+@payment.required(1000)
 def get_status(request):
     """
     Input: website url.
@@ -81,7 +72,7 @@ def get_status(request):
 
 # Get JSON-encoded IP address of a website.
 @api_view(['GET'])
-@payment.required(random_price())
+@payment.required(250)
 def get_ip(request):
 
     # grab the url for the IP address.
