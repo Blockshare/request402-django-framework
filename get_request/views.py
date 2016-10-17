@@ -45,10 +45,10 @@ def get_moocher_baddomain_api(request):
 @payment.required(1000)
 def get_status(request):
     """
-    Input: website url.
+    Input: Domain name URL.
     Output: JSON-encoded header and status code from url.
             {'status': {'is-trustworthy': ___, 'status_code': ___}, 'headers': {___}}
-    Exception: Exception raised if url does not exist or is broken.
+    Exception: Exception raised if URL does not exist or is broken.
     """
     website_url = request.GET.get('url')
     url = 'http://' + website_url
@@ -70,15 +70,17 @@ def get_status(request):
         return HttpResponse(json.dumps(exception, indent=2))
 
 
-# Get JSON-encoded IP address of a website.
 @api_view(['GET'])
 @payment.required(250)
 def get_ip(request):
-
-    # grab the url for the IP address.
+    """
+    Input: Domain name URL.
+    Output: JSON-encoded IP address of domain name url.
+            {'domain-ip': {'origin': ___, 'url': ___}}
+    Exception: Exception raised if URL does not exist or is broken.
+    """
     url = request.GET.get('url')
 
-    # Assign url and IP to variables and return them as JSON-encoded output.
     try:
         response = socket.gethostbyname(url)
         message = {'domain_ip': {'origin': response, 'url': url}}
@@ -89,12 +91,16 @@ def get_ip(request):
         return HttpResponse(json.dumps(exception, indent=2))
 
 
-# Get JSON-encoded IP address of user.
 @api_view(['GET'])
-@payment.required(100)
+@payment.required(5)
 def ip(request):
+    """
+    Input: Run API URL in command line or call it via client script.
+    Output: JSON-encoded IP address of users computer.
+            {'origin': ___}
+    Exception: Exception raised and 'REMOTE_ADDR' called.
+    """
 
-    # IP address information from Django's 'request.META.get' command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
     try:
