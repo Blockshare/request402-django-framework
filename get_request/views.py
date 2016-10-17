@@ -100,7 +100,6 @@ def ip(request):
             {'origin': ___}
     Exception: Exception raised and 'REMOTE_ADDR' called.
     """
-
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 
     try:
