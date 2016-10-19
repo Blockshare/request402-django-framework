@@ -112,22 +112,24 @@ def ip(request):
         return HttpsResponse(json.dumps(message, indent=2), status=200)
 
 
-# Returns JSON-encoded GET Header data.
 @api_view(['GET'])
 @payment.required(100)
 def get(request):
-
-    # Grab and arguments as a string.
+    """
+    Input: Run API URL in command line or call it via client script.
+    Output: JSON-encoded GET Header data.
+            {'headers': {'Accept': ___, 'Encoding': ___, 'User-Agent': ___,
+                        'HTTP-Host': ___, 'args': ___}, 'origin': ___}
+    Exception: Exception raised with wrong url.
+    """
     args = request.GET.get('args')
 
-    # Grab Header information using Djangos request.META.get command.
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
 
-    # Assign Header information to variables and return as JSON-encoded output.
     try:
         origin = x_forwarded_for.split(',')[0]
         accept = http_accept.split(',')[0]
