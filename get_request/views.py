@@ -1,3 +1,13 @@
+"""
+Copyright Blockshare Technologies, LLC.
+
+"""
+
+__author__ = "Casey O'Neill"
+__version__ = "1.0"
+__maintainer__ = "Casey O'Neill"
+__email__ = "cpo@request402.com"
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
@@ -144,26 +154,27 @@ def get(request):
         return HttpResponse(json.dumps(exception))
 
 
-# Get JSON-encoded output of a Bitcoin wallet address.
 @api_view(['GET'])
 @payment.required(100)
 def address(request):
-
-    # Assign a wallet address to a variable, place in API url, and return as
-    # JSON.
+    """
+    Input: Bitcoin wallet address.
+    Output: JSON-encoded results of wallet address.
+            {'Bitcoin': {'balance': ___, 'final_balance': ___,
+                         'total_received': ___, 'total_sent': ___}, 'address': ___}
+    Exception: Exception return if address not Bitcoin address.
+    """
     addr = request.GET.get('address')
     response = requests.get(
         'https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
     data = response.json()
 
-    # Assign JSON output to variables.
     address = data['address']
     balance = data['balance'] / 100000000.0
     fnl_balance = data['final_balance'] / 100000000.0
     total_rec = data['total_received'] / 100000000.0
     total_sent = data['total_sent'] / 100000000.0
 
-    # Return JSON-encoded output of variables.
     try:
         address_json = {'Bitcoin': {'balance': balance, 'final_balance': fnl_balance,
                                     'total_received': total_rec, 'total_sent': total_sent}, 'address': address}
