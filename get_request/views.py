@@ -3,19 +3,10 @@ Copyright Blockshare Technologies, LLC.
 
 """
 
-__author__ = "Casey O'Neill"
+__author__ = "cponeill"
 __version__ = "1.0"
-__maintainer__ = "Casey O'Neill"
-__email__ = "cpo@request402.com"
-
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.http import StreamingHttpResponse
-
-from rest_framework.decorators import api_view
-from two1.bitserv.django import payment
-
-from get_request.settings import FULLCONTACT_API
+__maintainer__ = "cponeill"
+__email__ = "cponeill@blockshare.io"
 
 import ssl
 import socket
@@ -26,29 +17,45 @@ import subprocess
 import sys
 import urllib.request as my_request
 
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.http import StreamingHttpResponse
+
+from rest_framework.decorators import api_view
+from two1.bitserv.django import payment
+from xml.etree import ElementTree
+
+from get_request.settings import FULLCONTACT_API
+
 
 def index(request):
-    """
-    Returns landing home page.
-    """
+    """Returns landing home page."""
     return render(request, '../templates/index.html', status=200)
 
 
 def info(request):
-    """
-    Returns landing info page.
-    """
+    """Returns landing info page."""
     return render(request, '../templates/info.html', status=200)
 
 
 def get_moocher_baddomain_api(request):
     """
-    Abstracting the moocher api call into its own function for simplicity.
+    Abstracting the moocher api call into its own function.
     returns JSON-encoded output of a 'baddomain'.
     """
     headers = {'content-type': 'application/json'}
     response = requests.request("GET", 'http://api.moocher.io/baddomain/' + request, headers=headers)
     return response.json()
+
+
+def get_alexa_xml(request):
+    """
+    Abstracting Alexa rankins into its own function.
+    Returns XML output. This output will then be turned into JSON.
+    """
+    response = requests.get('http://data.alexa.com/data?cli=10&url=http://' + request)
+    tree = ElementTree.fromstring(response.text)
+    return tree   
 
 
 @api_view(['GET'])
@@ -322,3 +329,24 @@ def get_blacklist(request):
     except:
         response = {'exception error': 'there seems to be something wrong with the request.'}
         return HttpResponse(json.dumps(response, indent=2), status=200)
+
+
+@api_view(['GET'])
+@payment.required(750)
+def get_rank(request):
+    url = request.GET.get('url')
+
+    try:
+        rank = get_alexa_xml(url).find(".//REACH").get("RANK")
+        delta = get_alexa_xml(url).find(".//RANK").get("DELTA")
+        params = {
+            'domain-rank': {
+                'rank': rank,
+                'rank-change': delta,
+                'url': url
+            }
+        }
+        return HttpResponse(json.dumps(params, indent=2), status=200)
+    except:
+        params = {'alexa-ranking': {'ranking': 'this domain is not ranked'}}
+        return HttpResponse(json.dumps(params, indent=2), status=200)

@@ -76,3 +76,8 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/blacklist?url=google.com')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
+
+    def test_ranking(self):
+        resp = self.client.get('/domain_rank?url=google.com')
+        self.assertEqual(resp.status_code, 402)
+        self.assertEqual(resp.content, b'"Payment Required"')
