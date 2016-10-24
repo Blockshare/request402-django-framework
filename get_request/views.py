@@ -1,6 +1,5 @@
 """
 Copyright Blockshare Technologies, LLC.
-
 """
 
 __author__ = "cponeill"
@@ -36,6 +35,11 @@ def index(request):
 def info(request):
     """Returns landing info page."""
     return render(request, '../templates/info.html', status=200)
+
+
+def new_index(request):
+    """Testing out a newly style index page."""
+    return render(request, '../templates/test.html', status=200)
 
 
 def get_moocher_baddomain_api(request):
@@ -77,10 +81,20 @@ def get_status(request):
     try:
         response = my_request.urlopen(url)
         headers = response.getheaders()[0:8]
-        message = {'status': {response.status: response.reason, 'is-trustworthy': clean},
-                   'headers': {headers[0][0]: headers[0][1], headers[1][0]: headers[1][1],
-                               headers[2][0]: headers[2][1], headers[3][0]: headers[3][1],
-                               headers[4][0]: headers[4][1], headers[5][0]: headers[5][1]}}
+        message = {
+            'status': {
+                response.status: response.reason,
+                'is-trustworthy': clean
+            }, 
+            'headers': {
+                 headers[0][0]: headers[0][1],
+                 headers[1][0]: headers[1][1],
+                 headers[2][0]: headers[2][1],
+                 headers[3][0]: headers[3][1],
+                 headers[4][0]: headers[4][1],
+                 headers[5][0]: headers[5][1]
+            }
+        }
         return HttpResponse(json.dumps(message, indent=2), status=200)
     except:
         exception = {"exception raised": "possibly %s doesn't exist" % (url)}
@@ -196,7 +210,10 @@ def address(request):
 @api_view(['GET'])
 @payment.required(100)
 def server_info(request):
-
+    """
+    Input: Domain name URL.
+    Output: JSON-encoded server location information.
+    """
     # Grab and assign URL information to JSON-encoded file.
     data = request.GET.get('url')
     uri = 'http://ipinfo.io'
@@ -213,8 +230,14 @@ def server_info(request):
         accept = http_accept.split(',')[0]
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
-        response = {'headers': {'accept': accept, 'encoding': encoding,
-                                'User-Agent': agent}, 'server': data}
+        response = {
+            'headers': {
+                'accept': accept,
+                'encoding': encoding,
+                'User-Agent': agent
+            },
+            'server': data
+        }
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}

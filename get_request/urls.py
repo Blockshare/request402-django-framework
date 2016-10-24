@@ -20,6 +20,7 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^$', get_request.views.index),
     url(r'^info$', get_request.views.info),
+    url(r'^test$', get_request.views.new_index),
     url(r'^domain_status$', get_request.views.get_status),
     url(r'^domain_ip$', get_request.views.get_ip),
     url(r'^ip$', get_request.views.ip),
