@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta name="description" content="Fixer.io is a free, open-source foreign exchange rates and currency conversion JSON API. It returns current as well as historical data and is updated daily.">
-    <title>HTTP(S) Micropayments JSON API</title>
+    <title>Request402</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
       * {
@@ -111,6 +111,7 @@
        
     </style>
   </head>
+  <link rel="shortcut icon" href="//machine-payable.herokuapp.com/static/img/heartbeat.ico" />
   <body>
     <div class="wrapper">
       <header>
@@ -131,12 +132,48 @@
           Get the origin of your IP address.
         </p>
         <!--googleoff: all-->
-        <code><a href="/ip?format=json">21 buy https://www.request402.com/ip</a><br />{ 
+        <code><a href="/ip?format=json">$ 21 buy https://www.request402.com/ip</a><br />
+{ 
   "origin": xxx.xxx.x.xx
 }</code>
         <!--googleon: all-->
-
-
+        <p>
+          Return GET data.
+        </p>
+        <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
+{
+  "headers": {
+      "args": "example text",
+      "User-Agent": "xxxxxx",
+      "HTTP-Host": "www.xxxxxx.com",
+      "Accept": "*/*",
+      "Encoding": "gzip"
+  },
+  "origin": "xxx.xxx.xx.xxx"
+}        
+</code>
+        <p>
+          Return header and server location data.
+        </p>
+        <code><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
+{
+    "headers": {
+        "encoding": "gzip",
+        "accept": "*/*",
+        "User-Agent": "xxxxxx"
+    },
+    "server": {
+        "loc": "xx,xx",
+        "ip": "xx.xx.xx.xxx",
+        "city": "Ashburn",
+        "org": "AS14618 Amazon.com, Inc.",
+        "hostname": "ec2.x.x.x.xxx",
+        "region": "Virginia",
+        "postal": "20149",
+        "country": "US"
+    }
+}
+</code>
         <p>
           Use Request402 in your own apps and even the browser.
         </p>
