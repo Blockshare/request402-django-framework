@@ -18,6 +18,7 @@
       body,
       a {
         color: #282828;
+        text-decoration: none;
       }
       .wrapper {
         margin: 0 auto;
@@ -101,6 +102,13 @@
         margin: 2em 0;
         text-align: center;
       }
+      #inner-code, code {
+        border-radius:2px;
+        white-space:pre-wrap;
+        background-color:#e6e6e6;
+      }
+      a {
+       
     </style>
   </head>
   <body>
@@ -108,132 +116,51 @@
       <header>
         <h1>Request402</h1>
         <h2>HTTP(S) Request & Response Micropayments Service</h2>
-        <img alt="logo" src="img/money.png">
+        <img alt="logo" src="//machine-payable.herokuapp.com/static/img/heartbeat.ico">
       </header>
 
       <section>
+      <center>
+        <h4>
+          Request402.com is a JSON API & Micropayments Service that lets you know when something is not right with your or your clients website.
+        </h4>
+      </center>
+        <h3>How to use:</h3>
 
         <p>
-          Request402.com is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
-        </p>
-
-        <p>
-          The rates are updated daily around 4PM CET.
-        </p>
-
-        <h3>Usage</h3>
-
-        <p>
-          Get the latest foreign exchange reference rates in JSON format.
+          Get the origin of your IP address.
         </p>
         <!--googleoff: all-->
-        <code class="request"><a>https://www.request402.com/ip</a></code>
+        <code><a href="/ip?format=json">21 buy https://www.request402.com/ip</a><br />{ 
+  "origin": xxx.xxx.x.xx
+}</code>
         <!--googleon: all-->
 
 
         <p>
-          Use <a href="http://openexchangerates.github.io/money.js/" target="_blank">money.js</a> in the browser.
+          Use Request402 in your own apps and even the browser.
         </p>
 
         <!--googleoff: all-->
-        <code class="js">var demo = function(data) {
-  fx.rates = data.rates
-  var rate = fx(1).from("GBP").to("USD")
-  alert("£1 = $" + rate.toFixed(4))
-}
+        <code class="js"># Example Flask App
+from two1.wallet import Wallet
+from two1.bitrequests import BitTransferRequests
 
-$.getJSON("http://api.fixer.io/latest", demo)
+requests = BitTransferRequests(Wallet())
+
+def fetch_api():
+    response = requests.get('https://www.request402.com/ip')
+    ip_addr = response.json()['origin']
+    print("Your IP address is %s." % ip_addr)
+
+if __name__ == '__main__':
+    fetch_api()
 </code>
         <!--googleon: all-->
 
-        <ol>
-          <li>
-            The API runs on <a class="referral" href="https://www.digitalocean.com/?refcode=7375a8447b75" target="_blank">Digital Ocean</a>.
-          </li>
-          <li>
-            The SSL/TLS certificate is provided by <a href="https://letsencrypt.org" target="_blank">Let's Encrypt</a>.
-          </li>
-          <li>
-            Check out the source code on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
-          </li>
-          <li>
-            Fetch the data sets on <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">ECB</a>.
-          </li>
-          <li>
-            The API comes with no warranty.
-          </li>
-        </ol>
-      </section>
       <footer>
-        <iframe src="https://ghbtns.com/github-btn.html?user=hakanensari&repo=fixer-io&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+         created and maintained by <a href="https://twitter.com/cponeill">cponeill</a>
       </footer>
     </div>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
-    <script src="js/money.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-36475354-1', 'auto')
-      ga('send', 'pageview')
-
-      $(function() {
-
-        // Make request examples clickable
-        $('code.request').each(function() {
-          var $this = $(this)
-          var url = $this.html().match(/<a>([^<]+)/)[1]
-          url += (/\?/.test(url) ? '&' : '?') + 'callback=?'
-
-          $this.on('click', function(e) {
-            var $pre = $this.find('pre')
-            if ($pre.length) {
-              $pre.remove()
-            } else {
-              $.getJSON(url, function(data) {
-                $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>')
-              })
-            }
-          })
-        })
-
-        // And make the JavaScript clickable
-        $('code.js').each(function() {
-          var $this = $(this)
-
-          $this.click(function() {
-            new Function(
-              $this.html()
-            )()
-          })
-        })
-
-        // Fill in uptime ratio
-        var uptimeRobotUrl = 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json'
-
-        jsonUptimeRobotApi = function(data) {
-          var monitor = data.monitors.monitor[0]
-          $('.uptime').html(Number(monitor.alltimeuptimeratio).toFixed(2) + '%')
-        }
-        $.ajax({ url: uptimeRobotUrl, dataType: 'jsonp' })
-
-        // Fill in application metrics
-        var addMetrics = function() {
-          $.getJSON('http://nrp.fixer.io?callback=?', function(data) {
-            $('.responsetime').html(data.response_time + 'ms')
-            $('.throughput').html(data.throughput + 'rpm')
-          })
-        }
-        addMetrics()
-        setInterval(addMetrics, 5000)
-
-        // Google Analytics events
-        $('.referral').click(function() {
-          ga('send', 'event', 'a', 'click', 'digitalocean')
-        })
-      })
-    </script>
   </body>
 </html>
