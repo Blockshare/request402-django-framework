@@ -36,11 +36,11 @@ def info(request):
     """Returns landing info page."""
     return render(request, '../templates/info.html', status=200)
 
-
+"""
 def new_index(request):
     """Testing out a newly style index page."""
     return render(request, '../templates/test.html', status=200)
-
+"""
 
 def get_moocher_baddomain_api(request):
     """

@@ -45,8 +45,8 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 SECRET_KEY = 'a5sk!^j5c)i3z^0sqfyz3q+4d%sw4-n07vtr84lb)7ja&9t_km'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = os.environ.get("DEBUG", "False").lower() in ['true', '1', 't']
+#DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() in ['true', '1', 't']
 
 ALLOWED_HOSTS = [
     'request402.herokuapp.com',
