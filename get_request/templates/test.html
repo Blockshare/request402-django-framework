@@ -217,6 +217,105 @@
 }
 </code>
         <p>
+          Returns detailed SSL/TLS data as JSON-encoded output.
+        </p>
+        <code><a href="/ssl?format=json">$ 21 buy https://www.request402.com/ssl?url=example.com</a><br />
+{
+  "ssl-info": {
+      "certificate": "http://******.crt",
+      "issuer": {
+          "commonName": "******",
+          "organizationName": "******",
+          "countryName": "**",
+          "organizationalUnitName": "www.*******.com"
+      },
+      "dns": [
+          "www.example.org",
+          "example.com",
+          "example.edu",
+          "example.net",
+          "example.org",
+          "www.example.com",
+          "www.example.edu",
+          "www.example.net"
+      ],
+      "status-protocol": "http://******.com",
+      "org-info": {
+          "commonName": "www.example.org",
+          "stateOrProvinceName": "******",
+          "organizationName": "******",
+          "localityName": "******",
+          "countryName": "**",
+          "organizationalUnitName": "******"
+      },
+      "serial-number": "******"
+  }
+}
+</code>
+        <p>
+          Return public key of SSL certificate for verification.
+        </p>
+        <code><a href="ssl-cert/?format=json">$ 21 buy https://www.request402.com/ssl-cert?url=example.com</a><br />
+  -----BEGIN CERTIFICATE-----
+   MIIF8jCCBNqgAwIBAgIQDmTF+8I2reFLFyrrQceMsDANBgkqhkiG9w0BAQsFADBw
+  ******
+  ******
+  ******
+  -----END CERTIFICATE-----
+</code>
+        <p>
+          Return status of domain name and if it is on any blacklist.
+        </p>
+        <code><a href="/blacklist?format=json">$ 21 buy https://www.request402.com/blacklist?url=example.com</a><br />
+{
+  "baddomain-info": {
+    "type": "baddomain",
+    "response": {
+        "source_ip": {
+            "is_quarantined": xx,
+            "score": x,
+            "geo": {},
+            "blacklist": []
+        },
+        "score": x,
+        "domain": {
+            "blacklist_mx": [],
+            "mx": [xxxxxx],
+            "blacklist_ns": [],
+            "ns": [
+                "xxxxxx.com.",
+                "xxxxxx.com."
+            ],
+            "score": x,
+            "blacklist": []
+        },
+        "ip": {
+            "is_quarantined": xx,
+            "score": x,
+            "geo": {
+                "country": "xx",
+                "continent": "xx",
+                "city": "",
+                "region": "",
+                "longitude": xx.xxx,
+                "latitude": xx.xxx,
+                "postal": "",
+                "as": {
+                    "name": "xxxxxx",
+                    "country": "xx",
+                    "asn": "xxxxxx",
+                    "networks": "['xx.xx.xxx.x/xx']"
+                },
+                "address": "xxx.xxx.xxx.xxx",
+                "hostname": ""
+            },
+            "blacklist": []
+         }
+      }
+   }
+}
+</code>
+        <p>
           Use Request402 in your own apps.
         </p>
 
