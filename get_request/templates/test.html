@@ -175,7 +175,49 @@
 }
 </code>
         <p>
-          Use Request402 in your own apps and even the browser.
+          Get the header, status, and trustworthiness of a specific domain URL.
+        </p>
+        <code><a href="/domain_status?format=json">$ 21 buy https://www.request402.com/domain_status?url=example.com</a><br />
+{
+    "headers": {
+       "Content-Type": "text/html; charset=utf-8",
+       "Date": "Fri, 26 Aug 2	016 22:27:32 GMT",
+       "Transfer-Encoding": "chunked",
+       "Connection": "close",
+       "Server": "Apache",
+       "Content-Security-Policy": "referrer no-referrer;"
+   },
+   "status": {
+       "is-trustworthy": "clean",
+       "200": "OK"
+   }
+}
+</code>
+        <p>
+          Get the origin IP address of a specifc domain URL.
+        </p>
+        <code><a href="/domain_ip?format=json">$ 21 buy https://www.request402.com/domain_ip?url=example.com</a><br />
+{
+  "ip_info": {
+    "origin": "93.184.216.34",
+    "url": "example.com"
+  }
+}
+</code>
+        <p>
+          Get the rank of a specific domain URL.
+        </p>
+        <code><a href="/domain_rank?format=json">$ 21 buy https://www.request402.com/domain_rank?url=example.com</a><br />
+{
+  "domain-rank": {
+      "rank-change": "-2837",
+      "rank": "9766",
+      "url": "example.com"
+  }
+}
+</code>
+        <p>
+          Use Request402 in your own apps.
         </p>
 
         <!--googleoff: all-->
