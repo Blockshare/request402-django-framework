@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta name="description" content="Fixer.io is a free, open-source foreign exchange rates and currency conversion JSON API. It returns current as well as historical data and is updated daily.">
+    <meta name="description" content="Request402 http(s) Request & Response Micropayments Service">
     <title>Request402</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
     <style type="text/css">
       * {
         margin: 0;
@@ -55,6 +55,9 @@
       }
       .status th {
         color: #ddd;
+        font-weight: normal;
+      }
+      th {
         font-weight: normal;
       }
       .status td {
@@ -107,8 +110,6 @@
         white-space:pre-wrap;
         background-color:#e6e6e6;
       }
-      a {
-       
     </style>
   </head>
   <link rel="shortcut icon" href="//machine-payable.herokuapp.com/static/img/heartbeat.ico" />
@@ -122,17 +123,33 @@
 
       <section>
       <center>
-        <h4>
-          Request402.com is a JSON API & Micropayments Service that lets you know when something is not right with your or your clients website.
-        </h4>
+        <h3>
+          Request402.com is a JSON API & Micropayments Service that lets you know when something is not right with your website.
+        </h3><br />
       </center>
+        <h4>Basic Requirements:</h4>
+          <center><table>
+            <tr>
+              <th><b>1.</b></th>
+              <th align="left">A <a href="https://21.co/features/">21 Bitcoin Computer</a> or 21 installed.</th>
+            </tr>
+            <tr>
+              <th><b>2.</b></th>
+              <th align="left">You will need to be connected the 21 Zerotier Marketplace.</th>
+            </tr>
+            <tr>
+              <th><b>3.</b></th>
+              <th align"left">Make sure you have mined or have enough satoshi in your wallet for transactions.</th>
+            </tr>
+          </table><br />
+         </center>
         <h3>How to use:</h3>
 
         <p>
           Get the origin of your IP address.
         </p>
         <!--googleoff: all-->
-        <code><a href="/ip?format=json">$ 21 buy https://www.request402.com/ip</a><br />
+        <code>Cost: 5 satoshi<br><a href="/ip?format=json">$ 21 buy https://www.request402.com/ip</a><br />
 { 
   "origin": xxx.xxx.x.xx
 }</code>
@@ -140,7 +157,7 @@
         <p>
           Return GET data.
         </p>
-        <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
+        <code>Cost: 5 satoshi<br><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
 {
   "headers": {
       "args": "example text",
@@ -155,7 +172,7 @@
         <p>
           Return header and server location data.
         </p>
-        <code><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
+        <code>Cost: 100 satoshi<br><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
 {
     "headers": {
         "encoding": "gzip",
@@ -413,16 +430,18 @@
         </p>
 
         <!--googleoff: all-->
-        <code class="js"># Example Flask App
+        <code># Example Flask App
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
 
 requests = BitTransferRequests(Wallet())
 
 def fetch_api():
-    response = requests.get('https://www.request402.com/ip')
-    ip_addr = response.json()['origin']
-    print("Your IP address is %s." % ip_addr)
+    response = requests.get('https://www.request402.com/server-location')
+    ip_addr = response.json()['server']['ip']
+    region = response.json()['server']['region']
+    print("Your IP address is %s and the server is located in %s."
+           % (ip_addr, region))
 
 if __name__ == '__main__':
     fetch_api()
