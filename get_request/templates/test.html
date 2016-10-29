@@ -124,9 +124,12 @@
       <section>
       <center>
         <h3>
-          Request402.com is a JSON API & Micropayments Service that lets you know when something is not right with your website.
-        </h3><br />
-      </center>
+          Request402.com is a JSON API that can be access via micropayments lets you know when something is not right with your digital assets.
+        </h3>
+      <h4>Hosted in <a href="http://www.request402.com">HTTP<a/> + <a href="https://www.request402.com">HTTPS</a><h4>
+      <h4>Run curl <a href="/info">/info</a> for text instructions on the command line.</h4>
+      <h4>created and maintained by <a href="https://twitter.com/cponeill">cponeill</a></h4>
+      </center><br />
         <h4>Basic Requirements:</h4>
           <center><table>
             <tr>
@@ -425,31 +428,33 @@
   "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
 }
 </code>
-        <p>
-          Use Request402 in your own apps.
-        </p>
-
         <!--googleoff: all-->
+         <p>
+           Use the Request402 Library to display data in the browser.
+         </p>
         <code># Example Flask App
+from flask import Flask
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
 
+app = Flask(__name__)
 requests = BitTransferRequests(Wallet())
 
+@app.route('/')
 def fetch_api():
     response = requests.get('https://www.request402.com/server-location')
     ip_addr = response.json()['server']['ip']
     region = response.json()['server']['region']
-    print("Your IP address is %s and the server is located in %s."
+    return ("Your IP address is %s and the server is located in %s."
            % (ip_addr, region))
 
 if __name__ == '__main__':
-    fetch_api()
-</code>
+    app.run('::', port=5001)
+</code>        
         <!--googleon: all-->
 
       <footer>
-         created and maintained by <a href="https://twitter.com/cponeill">cponeill</a>
+          <img alt="logo" src="//machine-payable.herokuapp.com/static/img/heartbeat.ico" width="70">
       </footer>
     </div>
     <script>
