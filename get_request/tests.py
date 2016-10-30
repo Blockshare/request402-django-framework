@@ -38,8 +38,8 @@ class SimpleTestCase(TestCase):
 
     def test_ip(self):
         resp = self.client.get('/ip')
-        self.assertEqual(resp.status_code, 402)
-        self.assertEqual(resp.content, b'"Payment Required"')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content, b'{\n  "origin": "127.0.0.1"\n}')
 
     def test_get(self):
         resp = self.client.get('/get')

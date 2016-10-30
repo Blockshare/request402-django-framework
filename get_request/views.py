@@ -123,7 +123,7 @@ def get_ip(request):
 
 
 @api_view(['GET'])
-@payment.required(5)
+#@payment.required(5)
 def ip(request):
     """
     Input: Run API URL in command line or call it via client script.
