@@ -1,7 +1,7 @@
 # Request402:
 HTTP Request & Response Micropayments Service
 ===========================================
-![Blockshare](https://machine-payable.herokuapp.com/static/img/abstractdot.ico)
+![Blockshare](https://machine-payable.herokuapp.com/static/img/heartbeat.ico)
 
 HTTP(S) Request & Response Micropayments Service
 
