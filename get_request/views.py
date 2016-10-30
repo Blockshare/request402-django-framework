@@ -1,5 +1,6 @@
 """
 Copyright Blockshare Technologies, LLC.
+
 """
 
 __author__ = "cponeill"
@@ -11,9 +12,6 @@ import ssl
 import socket
 import json
 import requests
-import shutil
-import subprocess
-import sys
 import urllib.request as my_request
 
 from django.http import HttpResponse
@@ -23,7 +21,6 @@ from django.http import StreamingHttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 from xml.etree import ElementTree
-
 from get_request.settings import FULLCONTACT_API
 
 
@@ -68,7 +65,7 @@ def get_status(request):
     """
     Input: Domain name URL.
     Output: JSON-encoded header and status code from url.
-            {'status': {'is-trustworthy': ___, 'status_code': ___}, 'headers': {___}}
+            {'status': {'trustworthy': ___, 'status_code': ___}, 'headers': {___}}
     Exception: Exception raised if URL does not exist or is broken.
     """
     website_url = request.GET.get('url')
@@ -76,7 +73,7 @@ def get_status(request):
 
     data = get_moocher_baddomain_api(website_url)
     data_json = data['response']['ip']['score']
-    clean = "clean" if data_json == 0 else "blacklist" 
+    clean = "yes" if data_json == 0 else "blacklisted" 
 
     try:
         response = my_request.urlopen(url)
@@ -84,7 +81,7 @@ def get_status(request):
         message = {
             'status': {
                 response.status: response.reason,
-                'is-trustworthy': clean
+                'trustworthy': clean
             }, 
             'headers': {
                  headers[0][0]: headers[0][1],
