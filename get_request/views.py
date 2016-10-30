@@ -37,9 +37,9 @@ def info(request):
     return render(request, '../templates/info.html', status=200)
 
 
-#def new_index(request):
-   # """Testing out a newly style index page."""
-    #return render(request, '../templates/test.html', status=200)
+def new_index(request):
+    """Testing out a newly style index page."""
+    return render(request, '../templates/test.html', status=200)
 
 
 def get_moocher_baddomain_api(request):
@@ -140,7 +140,7 @@ def ip(request):
     except:
         ip = request.META.get('REMOTE_ADDR')
         message = {'origin': ip}
-        return HttpsResponse(json.dumps(message, indent=2), status=200)
+        return HttpResponse(json.dumps(message, indent=2), status=200)
 
 
 @api_view(['GET'])
@@ -167,8 +167,16 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
-        response = {'headers': {'Accept': accept, 'Encoding': encoding, 'User-Agent': agent,
-                                'HTTP-Host': host, 'args': args}, 'origin': origin}
+        response = {
+            'headers': {
+                'Accept': accept,
+                'Encoding': encoding,
+                'User-Agent': agent,
+                'HTTP-Host': host, 
+                'args': args
+            },
+            'origin': origin
+        }
         return HttpResponse(json.dumps(response, indent=2), status=200)
     except:
         exception = {"Exception": "Something isn't working correctly here."}
@@ -197,8 +205,15 @@ def address(request):
     total_sent = data['total_sent'] / 100000000.0
 
     try:
-        address_json = {'Bitcoin': {'balance': balance, 'final_balance': fnl_balance,
-                                    'total_received': total_rec, 'total_sent': total_sent}, 'address': address}
+        address_json = {
+            'Bitcoin': {
+                'balance': balance,
+                'final_balance': fnl_balance,
+                'total_received': total_rec,
+                'total_sent': total_sent
+            },
+            'address': address
+        }
         return HttpResponse(json.dumps(address_json, indent=2), status=200)
     except:
         exception = {
@@ -206,7 +221,6 @@ def address(request):
         return HttpResponse(json.dumps(exception))
 
 
-# Output all JSON-encoded server location information.
 @api_view(['GET'])
 @payment.required(100)
 def server_info(request):
@@ -214,18 +228,15 @@ def server_info(request):
     Input: Domain name URL.
     Output: JSON-encoded server location information.
     """
-    # Grab and assign URL information to JSON-encoded file.
     data = request.GET.get('url')
     uri = 'http://ipinfo.io'
     raw = requests.get(uri)
     data = raw.json()
 
-    # Grab and assign Header information from Django request.META.get command.
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
 
-    # Combine variables and return all as JSON-encoded output.
     try:
         accept = http_accept.split(',')[0]
         encoding = http_encoding.split(',')[0]
@@ -244,19 +255,18 @@ def server_info(request):
         return HttpResponse(json.dumps(exception), status=200)
 
 
-# Get JSON-encoded output of company contact information from url.
 @api_view(['GET'])
 @payment.required(100)
 def company_information(request):
-
-    # Get url and assign to 'response' variable and output as JSON.
+    """
+    Input: Domain URL for a company.
+    Output: JSON-encoded company contact information.
+    """
     company = request.GET.get('url')
     response = requests.get(
         'https://api.fullcontact.com/v2/company/lookup.json?domain=' + company + '&apiKey=' + FULLCONTACT_API)
     response = response.json()
 
-    # Assign variable output to new JSON dict and return params. Break if
-    # there is an error.
     try:
         params = {
             'company-information': {
@@ -270,20 +280,18 @@ def company_information(request):
         return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
-# Get JSON-encoded output of twitter username search.
 @api_view(['GET'])
 @payment.required(100)
 def twitter_search(request):
-
-    # Get username, assign to variable, call 'fullcontact' api, and return
-    # json.
+    """
+    Input: Twitter username
+    Output: JSON-encoded demographic and social network profiles of Twitter username.
+    """
     username = request.GET.get('username')
     response = requests.get(
         'https://api.fullcontact.com/v2/person.json?twitter=' + username + '&apiKey=' + FULLCONTACT_API)
     response = response.json()
 
-    # Assign variable output to new JSON dict and return params. Break if
-    # there is an error.
     try:
         params = {
             'user_info': {
@@ -297,30 +305,29 @@ def twitter_search(request):
         return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
-# Get the public key of an URL's SSL certificate.
 @api_view(['GET'])
 @payment.required(1000)
 def get_ssl(request):
-
-    # Get url and assign to variable that is fetching whether or not there is
-    # a SSL certificate for that url.
+    """
+    Input: TLS/SSL certified URL.
+    Output: The public key of the URL's SSL certificate.
+    """
     url = request.GET.get('url')
     ssl_cert = ssl.get_server_certificate((url, 443))
 
-    # Return public key SSL certificate if it is available. Break if there is
-    # an error.
     try:
         return HttpResponse("\n" + ssl_cert, status=200)
     except:
         return HttpResponse(("There doesn't seem to be a SSL certificate for the URL you provided."), status=200)
 
 
-# Get the source of an SSL certificate.
-# Add comments code about this function.	
 @api_view(['GET'])
 @payment.required(2500)
 def get_ssl_source(request):
-
+    """
+    Input: TLS/SSL certified URL.
+    Output: JSON-encoded source information of an SSL certificate.
+    """
     hostname = request.GET.get('url')
 
     try:
@@ -331,8 +338,16 @@ def get_ssl_source(request):
         subject = dict(x[0] for x in cert['subject'])
         issuer = dict(x[0] for x in cert['issuer'])
         dns = [x[1] for x in cert['subjectAltName']]
-        subject_list = {'ssl-info': {'org-info': subject, 'serial-number': cert['serialNumber'], 'certificate': cert['caIssuers'][0], \
-                     'status-protocol': cert['OCSP'][0], 'dns': dns, 'issuer': issuer}}
+        subject_list = {
+            'ssl-info': {
+                'org-info': subject,
+                'serial-number': cert['serialNumber'],
+                'certificate': cert['caIssuers'][0],
+                'status-protocol': cert['OCSP'][0],
+                'dns': dns,
+                'issuer': issuer
+            }
+        }
         return HttpResponse(json.dumps(subject_list, indent=2), status=200)
     except:
         exception = {'exception error': 'either the hostname is not HTTPS it was typed incorrectly.'}
@@ -342,7 +357,10 @@ def get_ssl_source(request):
 @api_view(['GET'])
 @payment.required(1000)
 def get_blacklist(request):
-
+    """
+    Input: Domain URL.
+    Ouput: JSON-encoded information of trustworthiness of URL. 
+    """
     domain = request.GET.get('url')
 
     try:
@@ -357,6 +375,10 @@ def get_blacklist(request):
 @api_view(['GET'])
 @payment.required(750)
 def get_rank(request):
+    """
+    Input: Specific URL.
+    Output: JSON-encoded Alexa rankings of URL.
+    """
     url = request.GET.get('url')
 
     try:
