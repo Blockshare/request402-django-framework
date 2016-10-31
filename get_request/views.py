@@ -23,6 +23,7 @@ from two1.bitserv.django import payment
 from xml.etree import ElementTree
 from get_request.settings import FULLCONTACT_API
 from get_request.settings import MASHAPE
+from get_request.settings import SCREENSHOT
 
 
 def index(request):
@@ -58,6 +59,17 @@ def get_domainr_api(request):
     api_url = 'https://domainr.p.mashape.com/v1/info?mashape-key='
     headers = {"X-Mashape-Key": MASHAPE, "Accept": "application/json"}
     response = requests.get(api_url + MASHAPE + '&q=' + request, headers=headers)
+    return response.json()
+
+
+def get_whois_api(request, endpoint):
+    """
+    Abstractin the jsonwhois api call into its own function.
+    returns JSON-encoded output of domain name information
+    """
+    headers = {"Accept": "application/json", "Authorization": "Token token=" + SCREENSHOT}
+    params = {"domain": request}
+    response = requests.get("https://jsonwhois.com/api/v1/" + endpoint, headers=headers, params=params)
     return response.json()
 
 
@@ -429,7 +441,7 @@ def domain_search(request):
         availability = response['availability']
         data = {
             'domain-search': {
-                'tld': tld,
+                'tld-info': tld,
                 'whois_url': whois_url,
                 'availability': availability
             }
@@ -438,3 +450,39 @@ def domain_search(request):
     except:
         data = {'exception': 'there might be something wrong with the url'}
         return HttpResponse(json.dumps(data, indent=2), status=200)
+
+
+@api_view(['GET'])
+@payment.required(1000)
+def domain_social(request):
+    """
+    Input: Domain URL.
+    Output: JSON-encoded social stats of website.
+    Exception raised if domain or api not working correctly.
+    """
+    url = request.GET.get('url')
+
+    try:
+        response = get_whois_api(url, 'social')
+        return HttpResponse(json.dumps(response, indent=2), status=200)
+    except:
+        params = {'exception raised': 'there is a problem with the url.'}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
+
+
+@api_view(['GET'])
+@payment.required(2500)
+def domain_screenshot(request):
+    """
+    Input: Domain URL.
+    Output: JSON-encoded link to screenshot of website.
+    Exception raised if domain or api not working correctly.
+    """
+    url = request.GET.get('url')
+    
+    try:
+        response = get_whois_api(url, 'screenshot')
+        return HttpResponse(json.dumps(response, indent=2), status=200)
+    except:
+        params = {'exception raised': 'there is a problem with the url.'}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
