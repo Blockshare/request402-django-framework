@@ -90,3 +90,13 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/domain_search?url=google.com')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
+
+    def test_social(self):
+        resp = self.client.get('/domain_social_stats?url=google.com')
+        self.assertEqual(resp.status_code, 402)
+        self.assertEqual(resp.content, b'"Payment Required"')
+
+    def test_screenshot(self):
+        resp = self.client.get('/domain_screenshot?url=google.com')
+        self.assertEqual(resp.status_code, 402)
+        self.assertEqual(resp.content, b'"Payment Required"')
