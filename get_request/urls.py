@@ -20,7 +20,7 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^$', get_request.views.index),
     url(r'^info$', get_request.views.info),
-    url(r'^test$', get_request.views.new_index),
+    #url(r'^test$', get_request.views.new_index),
     url(r'^domain_status$', get_request.views.get_status),
     url(r'^domain_ip$', get_request.views.get_ip),
     url(r'^ip$', get_request.views.ip),
@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^ssl$', get_request.views.get_ssl_source),
     url(r'^blacklist$', get_request.views.get_blacklist),
     url(r'^domain_rank$', get_request.views.get_rank),
+    url(r'^domain_search$', get_request.views.domain_search),
 ]

@@ -237,6 +237,22 @@
 }
 </code>
         <p>
+          Check the availability of a domain name.
+        </p>
+        <code><a href="/domain_search?format=json">$ 21 buy https://www.request.com/domain_search?url=example.com</a><br />
+{
+    "domain-search": {
+        "tld": {
+            "iana_url": "https://www.iana.org/domains/root/db/com.html",
+            "wikipedia_url": "https://en.wikipedia.org/wiki/.com",
+            "domain": "com"
+        },
+        "whois_url": "http://who.is/whois/example.com",
+        "availability": "taken"
+    }
+}
+</code>
+        <p>
           Returns detailed SSL/TLS data as JSON-encoded output.
         </p>
         <code><a href="/ssl?format=json">$ 21 buy https://www.request402.com/ssl?url=example.com</a><br />

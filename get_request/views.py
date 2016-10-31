@@ -22,6 +22,7 @@ from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 from xml.etree import ElementTree
 from get_request.settings import FULLCONTACT_API
+from get_request.settings import MASHAPE
 
 
 def index(request):
@@ -47,6 +48,18 @@ def get_moocher_baddomain_api(request):
     headers = {'content-type': 'application/json'}
     response = requests.request("GET", 'http://api.moocher.io/baddomain/' + request, headers=headers)
     return response.json()
+
+
+def get_domainr_api(request):
+    """
+    Abstracting the Domainr api call into its own function.
+    returns JSON-encoded output of possible domain name.
+    """
+    api_url = 'https://domainr.p.mashape.com/v1/info?mashape-key='
+    headers = {"X-Mashape-Key": MASHAPE, "Accept": "application/json"}
+    response = requests.get(api_url + MASHAPE + '&q=' + request, headers=headers)
+    return response.json()
+
 
 
 def get_alexa_xml(request):
@@ -391,3 +404,31 @@ def get_rank(request):
     except:
         params = {'alexa-ranking': {'ranking': 'this domain is not ranked'}}
         return HttpResponse(json.dumps(params, indent=2), status=200)
+
+
+@api_view(['GET'])
+@payment.required(1000)
+def domain_search(request):
+    """
+    Input: Domain name / URL.
+    Output: JSON-encoded search suggestions related to the query, as well as availability
+            and links to register the suggested domains
+    """
+    url = request.GET.get('url')
+
+    try:
+        response = get_domainr_api(url)
+        tld = response['tld']
+        whois_url = response['whois_url']
+        availability = response['availability']
+        data = {
+            'domain-search': {
+                'tld': tld,
+                'whois_url': whois_url,
+                'availability': availability
+            }
+        }
+        return HttpResponse(json.dumps(data, indent=2), status=200)
+    except:
+        data = {'exception': 'there might be something wrong with the url'}
+        return HttpResponse(json.dumps(data, indent=2), status=200)
