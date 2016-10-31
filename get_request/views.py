@@ -236,6 +236,7 @@ def server_info(request):
     """
     Input: Domain name URL.
     Output: JSON-encoded server location information.
+    Exception raised if domain not correct or available.
     """
     data = request.GET.get('url')
     uri = 'http://ipinfo.io'
@@ -320,6 +321,7 @@ def get_ssl(request):
     """
     Input: TLS/SSL certified URL.
     Output: The public key of the URL's SSL certificate.
+    Exception raised if domain not TLS/SSL certified.
     """
     url = request.GET.get('url')
     ssl_cert = ssl.get_server_certificate((url, 443))
@@ -336,6 +338,7 @@ def get_ssl_source(request):
     """
     Input: TLS/SSL certified URL.
     Output: JSON-encoded source information of an SSL certificate.
+    Exception raised if domain not TLS/SSL certified.
     """
     hostname = request.GET.get('url')
 
@@ -369,6 +372,7 @@ def get_blacklist(request):
     """
     Input: Domain URL.
     Ouput: JSON-encoded information of trustworthiness of URL. 
+    Exception raised if domain does not exist 
     """
     domain = request.GET.get('url')
 
@@ -387,6 +391,7 @@ def get_rank(request):
     """
     Input: Specific URL.
     Output: JSON-encoded Alexa rankings of URL.
+    Exception raised if domain not found in rankings or does not rank high enough.
     """
     url = request.GET.get('url')
 
@@ -413,6 +418,7 @@ def domain_search(request):
     Input: Domain name / URL.
     Output: JSON-encoded search suggestions related to the query, as well as availability
             and links to register the suggested domains
+    Exception raised if domain not found.
     """
     url = request.GET.get('url')
 
