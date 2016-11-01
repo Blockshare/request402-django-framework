@@ -23,7 +23,7 @@ from two1.bitserv.django import payment
 from xml.etree import ElementTree
 from get_request.settings import FULLCONTACT_API
 from get_request.settings import MASHAPE
-from get_request.settings import SCREENSHOT
+from get_request.settings import JSONWHOIS
 
 
 def index(request):
@@ -67,7 +67,7 @@ def get_whois_api(request, endpoint):
     Abstractin the jsonwhois api call into its own function.
     returns JSON-encoded output of domain name information
     """
-    headers = {"Accept": "application/json", "Authorization": "Token token=" + SCREENSHOT}
+    headers = {"Accept": "application/json", "Authorization": "Token token=" + JSONWHOIS}
     params = {"domain": request}
     response = requests.get("https://jsonwhois.com/api/v1/" + endpoint, headers=headers, params=params)
     return response.json()
@@ -461,7 +461,7 @@ def domain_social(request):
     Exception raised if domain or api not working correctly.
     """
     url = request.GET.get('url')
-
+    print(JSONWHOIS)
     try:
         response = get_whois_api(url, 'social')
         return HttpResponse(json.dumps(response, indent=2), status=200)
