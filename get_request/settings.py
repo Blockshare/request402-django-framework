@@ -34,7 +34,7 @@ BIT_REQUESTS = BitTransferRequests(WALLET, USERNAME)
 
 FULLCONTACT_API = os.environ.get("FULLCONTACT_API")
 MASHAPE = os.environ.get("MASHAPE")
-SCREENSHOT = os.environ.get('SCREENSHOT')
+JSONWHOIS = os.environ.get('JSONWHOIS')
 # load database from the DATABASE_URL environment variable
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
