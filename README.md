@@ -3,7 +3,7 @@ Domain data that's plain and simple.
 ===========================================
 ![Blockshare](https://machine-payable.herokuapp.com/static/img/heartbeat.ico)
 
-HTTP(S) Request & Response Micropayments Service
+HTTP(S) Request & Response Micropayments Service for your Digital Assets.
 
 All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572
 
