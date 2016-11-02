@@ -22,10 +22,6 @@ class SimpleTestCase(TestCase):
         resp = self.client.get('/info')
         self.assertEqual(resp.status_code, 200)
 
-    def test_test(self):
-        resp = self.client.get('/test')
-        self.assertEqual(resp.status_code, 200)
-
     def test_domain_status(self):
         resp = self.client.get('/domain_status?uri=google.com')
         self.assertEqual(resp.status_code, 402)
