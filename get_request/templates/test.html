@@ -117,17 +117,16 @@
     <div class="wrapper">
       <header>
         <h1>Request402</h1>
-        <h2>HTTP(S) Request & Response Micropayments Service</h2>
+        <h2>Domain Data that's Plain & Simple.</h2>
         <img alt="logo" src="//machine-payable.herokuapp.com/static/img/heartbeat.ico">
       </header>
 
       <section>
       <center>
         <h3>
-          Request402.com is a JSON API that can be access via micropayments lets you know when something is not right with your digital assets.
+          HTTP(S) Request & Response Micropayments for your Digital Assets. Easily access the JSON API with Bitcoin Micropayments.
         </h3>
       <h4>Hosted in <a href="http://www.request402.com">HTTP<a/> + <a href="https://www.request402.com">HTTPS</a><h4>
-      <h4>Run curl <a href="/info">/info</a> for text instructions on the command line.</h4>
       <h4>created and maintained by <a href="https://twitter.com/cponeill">cponeill</a></h4>
       </center><br />
         <h4>Basic Requirements:</h4>
@@ -147,12 +146,12 @@
           </table><br />
          </center>
         <h3>How to use:</h3>
-
+        <h4>All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572</h4><br>
         <p>
           Get the origin of your IP address.
         </p>
         <!--googleoff: all-->
-        <code>Cost: 5 satoshi<br><a href="/ip?format=json">$ 21 buy https://www.request402.com/ip</a><br />
+        <code>Cost: Free<br><a href="/ip?format=json">$ 21 buy https://www.request402.com/ip</a><br />
 { 
   "origin": xxx.xxx.x.xx
 }</code>
@@ -160,7 +159,7 @@
         <p>
           Return GET data.
         </p>
-        <code>Cost: 5 satoshi<br><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
+        <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
 {
   "headers": {
       "args": "example text",
@@ -175,7 +174,7 @@
         <p>
           Return header and server location data.
         </p>
-        <code>Cost: 100 satoshi<br><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
+        <code><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
 {
     "headers": {
         "encoding": "gzip",
@@ -257,15 +256,17 @@
         </p>
         <code><a href="/domain_social_stats?format=json">$ 21 buy https://www.request.com/domain_social_stats?url=example.com</a><br />
 {
-    "created_at": "******",
-    "domain": "example.com",
-    "facebook": null,
-    "google": 72431,
-    "linkedin": 0,
-    "pinterest": 1,
-    "stumbleupon": 5882,
-    "twitter": null,
-    "updated_at": "******"
+    "social-stats": {
+        "created_at": "******",
+        "domain": "example.com",
+        "facebook": null,
+        "google": 72431,
+        "linkedin": 0,
+        "pinterest": 1,
+        "stumbleupon": 5882,
+        "twitter": null,
+        "updated_at": "******"
+    }
 }
 </code>
         <p>
@@ -273,10 +274,12 @@
         </p>
         <code><a href="/domain_screenshot?format=json">$ 21 buy https://www.request.com/domain_screenshot?url=example.com</a><br />
 {
-    "created_at": "******",
-    "domain": "example.com",
-    "updated_at": "******",
-    "url": "d3sikw9bo1fj7a.cloudfront.net/images/6526390290cda254e17594e615615420.png"
+    "screenshot": {
+        "created_at": "******",
+        "domain": "example.com",
+        "updated_at": "******",
+        "url": "d3sikw9bo1fj7a.cloudfront.net/images/6526390290cda254e17594e615615420.png"
+    }
 }
 </code
         <p>
