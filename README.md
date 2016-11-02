@@ -1,5 +1,5 @@
 # Request402:
-HTTP Request & Response Micropayments Service
+Domain data that's plain and simple.
 ===========================================
 ![Blockshare](https://machine-payable.herokuapp.com/static/img/heartbeat.ico)
 
