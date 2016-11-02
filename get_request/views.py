@@ -36,11 +36,6 @@ def info(request):
     return render(request, '../templates/info.html', status=200)
 
 
-def new_index(request):
-    """Testing out a newly style index page."""
-    return render(request, '../templates/test.html', status=200)
-
-
 def get_moocher_baddomain_api(request):
     """
     Abstracting the moocher api call into its own function.
@@ -461,10 +456,11 @@ def domain_social(request):
     Exception raised if domain or api not working correctly.
     """
     url = request.GET.get('url')
-    print(JSONWHOIS)
+
     try:
         response = get_whois_api(url, 'social')
-        return HttpResponse(json.dumps(response, indent=2), status=200)
+        params = {'social-stats': response}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
     except:
         params = {'exception raised': 'there is a problem with the url.'}
         return HttpResponse(json.dumps(params, indent=2), status=200)
@@ -482,7 +478,8 @@ def domain_screenshot(request):
     
     try:
         response = get_whois_api(url, 'screenshot')
-        return HttpResponse(json.dumps(response, indent=2), status=200)
+        params = {'screenshot': response}
+        return HttpResponse(json.dumps(params, indent=2), status=200)
     except:
         params = {'exception raised': 'there is a problem with the url.'}
         return HttpResponse(json.dumps(params, indent=2), status=200)
