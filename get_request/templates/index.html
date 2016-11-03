@@ -193,7 +193,7 @@
 }
 </code>
         <p>
-          Get the header, status, and trustworthiness of a specific domain URL.
+          Get the header, status, and trustworthiness of a domain.
         </p>
         <code><a href="/domain_status?format=json">$ 21 buy https://www.request402.com/domain_status?url=example.com</a><br />
 {
@@ -206,13 +206,13 @@
        "Content-Security-Policy": "referrer no-referrer;"
    },
    "status": {
-       "is-trustworthy": "clean",
+       "is-trustworthy": "yes",
        "200": "OK"
    }
 }
 </code>
         <p>
-          Get the origin IP address of a specifc domain URL.
+          Get the origin IP address of a domain.
         </p>
         <code><a href="/domain_ip?format=json">$ 21 buy https://www.request402.com/domain_ip?url=example.com</a><br />
 {
@@ -223,7 +223,7 @@
 }
 </code>
         <p>
-          Get the rank of a specific domain URL.
+          Get the rank of a domain.
         </p>
         <code><a href="/domain_rank?format=json">$ 21 buy https://www.request402.com/domain_rank?url=example.com</a><br />
 {
@@ -235,7 +235,7 @@
 }
 </code>
         <p>
-          Check the availability of a domain name.
+          Check the availability of a domain.
         </p>
         <code><a href="/domain_search?format=json">$ 21 buy https://www.request.com/domain_search?url=example.com</a><br />
 {
@@ -282,7 +282,7 @@
 }
 </code
         <p>
-          Returns detailed SSL/TLS data as JSON-encoded output.
+          Returns detailed SSL/TLS data of a domain.
         </p>
         <code><a href="/ssl?format=json">$ 21 buy https://www.request402.com/ssl?url=example.com</a><br />
 {
@@ -383,10 +383,10 @@
           <h3>How to use in your own applications:</h3>
           <p>
            Use the Request402 Library in your own apps. Here are a couple of code 
-           templates that can easily be used as starters to incorporate the library
-           into your own apps.
+           templates that can easily be used as starters to incorporate the API.
          </p>
-        <code># Example command line application.
+         <p>Simple command line application:</p>
+        <code># Copy and save this code as example.py
 # run ---> $ python3 example.py
 
 from two1.wallet import Wallet
@@ -406,9 +406,11 @@ def fetch_server_info():
 if __name__ == '__main__':
     fetch_server_info()
 </code>
-        <code># Example Flask Application
-# run ---> $ python3 example.py
+        <p>Example Flask Application:</p>
+        <code># Copy and save this code as flask-example.py
+# run ---> $ python3 flask-example.py
 # Open http://localhost:5001/ in your browser.
+# Use a tool like ngrok for secure a tunnel to localhost.
 
 from flask import Flask
 from two1.wallet import Wallet
