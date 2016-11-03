@@ -124,7 +124,7 @@
       <section>
       <center>
         <h3>
-          HTTP(S) Request & Response Micropayments for your Digital Assets. Easily access the JSON API with Bitcoin Micropayments.
+          HTTP(S) Request & Response API for your Digital Assets.<br> Easily access JSON output with Bitcoin Micropayments.
         </h3>
       <h4>Hosted in <a href="http://www.request402.com">HTTP<a/> + <a href="https://www.request402.com">HTTPS</a><h4>
       <h4>created and maintained by <a href="https://twitter.com/cponeill">cponeill</a></h4>
@@ -132,20 +132,20 @@
         <h4>Basic Requirements:</h4>
           <center><table>
             <tr>
-              <th><b>1.</b></th>
-              <th align="left">A <a href="https://21.co/features/">21 Bitcoin Computer</a> or 21 installed.</th>
+              <th><b>1.  </b></th>
+              <th align="left">A <a href="https://21.co/features/">21 Bitcoin Computer</a> or the 21 free client and Python 3 installed.</th>
             </tr>
             <tr>
-              <th><b>2.</b></th>
+              <th><b>2.  </b></th>
               <th align="left">You will need to be connected the 21 Zerotier Marketplace.</th>
             </tr>
             <tr>
-              <th><b>3.</b></th>
+              <th><b>3.  </b></th>
               <th align"left">Make sure you have mined or have enough satoshi in your wallet for transactions.</th>
             </tr>
           </table><br />
          </center>
-        <h3>How to use:</h3>
+        <h3>How to use in the command line:</h3>
         <h4>All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572</h4><br>
         <p>
           Get the origin of your IP address.
@@ -159,10 +159,9 @@
         <p>
           Return GET data.
         </p>
-        <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get?args="example text"</a><br />
+        <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get</a><br />
 {
   "headers": {
-      "args": "example text",
       "User-Agent": "xxxxxx",
       "HTTP-Host": "www.xxxxxx.com",
       "Accept": "*/*",
@@ -381,28 +380,57 @@
 }
 </code>
         <!--googleoff: all-->
-         <p>
-           Use the Request402 Library to display data in the browser.
+          <h3>How to use in your own applications:</h3>
+          <p>
+           Use the Request402 Library in your own apps. Here are a couple of code 
+           templates that can easily be used as starters to incorporate the library
+           into your own apps.
          </p>
-        <code># Example Flask App
+        <code># Example command line application.
+# run ---> $ python3 example.py
+
+from two1.wallet import Wallet
+from two1.bitrequests import BitTransferRequests
+
+wallet = Wallet()
+requests = BitTransferRequests(wallet)
+
+@app.route('/')
+def fetch_server_info():
+    response = requests.get('https://www.request402.com/server-location')
+    ip_addr = response.json()['server']['ip']
+    region = response.json()['server']['region']
+    print("Your IP address is %s and the server is located in %s."
+           % (ip_addr, region))
+
+if __name__ == '__main__':
+    fetch_server_info()
+</code>
+        <code># Example Flask Application
+# run ---> $ python3 example.py
+# Open http://localhost:5001/ in your browser.
+
 from flask import Flask
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
 
 app = Flask(__name__)
-requests = BitTransferRequests(Wallet())
+wallet = Wallet()
+requests = BitTransferRequests(wallet)
 
 @app.route('/')
-def fetch_api():
-    response = requests.get('https://www.request402.com/server-location')
-    ip_addr = response.json()['server']['ip']
-    region = response.json()['server']['region']
-    return ("Your IP address is %s and the server is located in %s."
-           % (ip_addr, region))
+def rank_api():
+    url = 'example.com'
+    response = requests.get('https://www.request402.com/domain_rank?url=' + url)
+    rank = response.json()['domain-rank']['rank']
+    delta_rank = response.json()['domain-rank']['rank-change']
+    return ("The domain %s is ranked at %s and has changed %s today." 
+            % (url, rank, delta_rank))
 
 if __name__ == '__main__':
-    app.run('::', port=5001)
-</code>        
+    app.run("::", port=5001)
+</code>
+        
         <!--googleon: all-->
 
       <footer>
