@@ -422,12 +422,11 @@ requests = BitTransferRequests(wallet)
 
 @app.route('/')
 def rank_api():
-    url = 'example.com'
-    response = requests.get('https://www.request402.com/domain_rank?url=' + url)
-    rank = response.json()['domain-rank']['rank']
-    delta_rank = response.json()['domain-rank']['rank-change']
-    return ("The domain %s is ranked at %s and has changed %s today." 
-            % (url, rank, delta_rank))
+    response = requests.get('https://www.request402.com/server-location')
+    ip_addr = response.json()['server']['ip']
+    region = response.json()['server']['region']
+    return ("Your IP address is %s and the server is located in %s."
+           % (ip_addr, region))
 
 if __name__ == '__main__':
     app.run("::", port=5001)
