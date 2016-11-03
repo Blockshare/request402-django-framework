@@ -159,7 +159,7 @@ def ip(request):
 
 
 @api_view(['GET'])
-@payment.required(100)
+@payment.required(5)
 def get(request):
     """
     Input: Run API URL in command line or call it via client script.
@@ -234,7 +234,7 @@ def address(request):
 
 
 @api_view(['GET'])
-@payment.required(100)
+@payment.required(5)
 def server_info(request):
     """
     Input: Domain name URL.
