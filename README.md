@@ -4,7 +4,9 @@ Domain data that's plain and simple.
 ![Blockshare](https://machine-payable.herokuapp.com/static/img/heartbeat.ico)
 
 HTTP(S) Request & Response Library for your Digital Assets.
+
 Easily access the JSON API with Bitcoin Micropayments
+
 All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572
 
 Full documentation can be found at https://www.request402.com
