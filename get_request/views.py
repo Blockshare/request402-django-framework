@@ -165,11 +165,9 @@ def get(request):
     Input: Run API URL in command line or call it via client script.
     Output: JSON-encoded GET Header data.
             {'headers': {'Accept': ___, 'Encoding': ___, 'User-Agent': ___,
-                        'HTTP-Host': ___, 'args': ___}, 'origin': ___}
+                        'HTTP-Host': ___}, 'origin': ___}
     Exception: Exception raised with wrong url.
     """
-    args = request.GET.get('args')
-
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     http_accept = request.META.get('HTTP_ACCEPT')
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
@@ -188,7 +186,6 @@ def get(request):
                 'Encoding': encoding,
                 'User-Agent': agent,
                 'HTTP-Host': host, 
-                'args': {args}
             },
             'origin': origin
         }
