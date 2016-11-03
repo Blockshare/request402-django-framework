@@ -68,7 +68,6 @@ def get_whois_api(request, endpoint):
     return response.json()
 
 
-
 def get_alexa_xml(request):
     """
     Abstracting Alexa rankins into its own function.
@@ -189,7 +188,7 @@ def get(request):
                 'Encoding': encoding,
                 'User-Agent': agent,
                 'HTTP-Host': host, 
-                'args': args
+                'args': {args}
             },
             'origin': origin
         }
