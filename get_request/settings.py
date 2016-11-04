@@ -43,6 +43,7 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Although it must be known, this key doesn't do a thing at all.
 SECRET_KEY = 'a5sk!^j5c)i3z^0sqfyz3q+4d%sw4-n07vtr84lb)7ja&9t_kn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
