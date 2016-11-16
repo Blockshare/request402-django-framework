@@ -159,7 +159,7 @@
 }</code>
         <!--googleon: all-->
         <p>
-          Return GET data.
+          Return GET header data of your IP.
         </p>
         <code><a href="/get?format=json">$ 21 buy https://www.request402.com/get</a><br />
 {
@@ -173,7 +173,7 @@
 }        
 </code>
         <p>
-          Return header and server location data.
+          Return your header and server location data.
         </p>
         <code><a href="/server-location?format=json">$ 21 buy https://www.request402.com/server-location</a><br />
 {
@@ -258,7 +258,6 @@
         <code><a href="/domain_social_stats?format=json">$ 21 buy https://www.request.com/domain_social_stats?url=example.com</a><br />
 {
     "social-stats": {
-        "created_at": "******",
         "domain": "example.com",
         "facebook": null,
         "google": 72431,
@@ -266,7 +265,6 @@
         "pinterest": 1,
         "stumbleupon": 5882,
         "twitter": null,
-        "updated_at": "******"
     }
 }
 </code>
@@ -276,9 +274,7 @@
         <code><a href="/domain_screenshot?format=json">$ 21 buy https://www.request.com/domain_screenshot?url=example.com</a><br />
 {
     "screenshot": {
-        "created_at": "******",
         "domain": "example.com",
-        "updated_at": "******",
         "url": "d3sikw9bo1fj7a.cloudfront.net/images/6526390290cda254e17594e615615420.png"
     }
 }
@@ -423,7 +419,7 @@ wallet = Wallet()
 requests = BitTransferRequests(wallet)
 
 @app.route('/')
-def rank_api():
+def fetch_server_info():
     response = requests.get('https://www.request402.com/server-location')
     ip_addr = response.json()['server']['ip']
     region = response.json()['server']['region']
