@@ -42,24 +42,8 @@ class SimpleTestCase(TestCase):
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
 
-    def test_btc_address(self):
-        resp = self.client.get(
-            '/bitcoin?address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa')
-        self.assertEqual(resp.status_code, 402)
-        self.assertEqual(resp.content, b'"Payment Required"')
-
     def test_server_location(self):
         resp = self.client.get('/server-location')
-        self.assertEqual(resp.status_code, 402)
-        self.assertEqual(resp.content, b'"Payment Required"')
-
-    def test_company_contact(self):
-        resp = self.client.get('/company-contact')
-        self.assertEqual(resp.status_code, 402)
-        self.assertEqual(resp.content, b'"Payment Required"')
-
-    def test_twitter_acct(self):
-        resp = self.client.get('/twitter')
         self.assertEqual(resp.status_code, 402)
         self.assertEqual(resp.content, b'"Payment Required"')
 
