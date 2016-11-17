@@ -32,7 +32,6 @@ WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
 USERNAME = Config().username
 BIT_REQUESTS = BitTransferRequests(WALLET, USERNAME)
 
-FULLCONTACT_API = os.environ.get("FULLCONTACT_API")
 MASHAPE = os.environ.get("MASHAPE")
 JSONWHOIS = os.environ.get('JSONWHOIS')
 # load database from the DATABASE_URL environment variable
