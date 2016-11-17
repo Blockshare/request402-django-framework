@@ -21,7 +21,6 @@ from django.http import StreamingHttpResponse
 from rest_framework.decorators import api_view
 from two1.bitserv.django import payment
 from xml.etree import ElementTree
-from get_request.settings import FULLCONTACT_API
 from get_request.settings import MASHAPE
 from get_request.settings import JSONWHOIS
 
@@ -195,43 +194,6 @@ def get(request):
         return HttpResponse(json.dumps(exception))
 
 
-@api_view(['GET'])
-@payment.required(100)
-def address(request):
-    """
-    Input: Bitcoin wallet address.
-    Output: JSON-encoded results of wallet address.
-            {'Bitcoin': {'balance': ___, 'final_balance': ___,
-                         'total_received': ___, 'total_sent': ___}, 'address': ___}
-    Exception: Exception return if address not Bitcoin address.
-    """
-    addr = request.GET.get('address')
-    response = requests.get(
-        'https://api.blockcypher.com/v1/btc/main/addrs/' + addr)
-    data = response.json()
-
-    address = data['address']
-    balance = data['balance'] / 100000000.0
-    fnl_balance = data['final_balance'] / 100000000.0
-    total_rec = data['total_received'] / 100000000.0
-    total_sent = data['total_sent'] / 100000000.0
-
-    try:
-        address_json = {
-            'Bitcoin': {
-                'balance': balance,
-                'final_balance': fnl_balance,
-                'total_received': total_rec,
-                'total_sent': total_sent
-            },
-            'address': address
-        }
-        return HttpResponse(json.dumps(address_json, indent=2), status=200)
-    except:
-        exception = {
-            "exception": "%s may not be a proper bitcoin address" % (address)}
-        return HttpResponse(json.dumps(exception))
-
 
 @api_view(['GET'])
 @payment.required(5)
@@ -266,56 +228,6 @@ def server_info(request):
     except:
         exception = {"Exception": "Something isn't working correctly here."}
         return HttpResponse(json.dumps(exception), status=200)
-
-
-@api_view(['GET'])
-@payment.required(100)
-def company_information(request):
-    """
-    Input: Domain URL for a company.
-    Output: JSON-encoded company contact information.
-    """
-    company = request.GET.get('url')
-    response = requests.get(
-        'https://api.fullcontact.com/v2/company/lookup.json?domain=' + company + '&apiKey=' + FULLCONTACT_API)
-    response = response.json()
-
-    try:
-        params = {
-            'company-information': {
-                'founded': response['organization']['founded'],
-                'contact': response['organization']['contactInfo'],
-            }
-        }
-        return HttpResponse(json.dumps(params, indent=2), status=200)
-    except:
-        params = {"exception error": "it appears something broke in the code."}
-        return HttpResponse(json.dumps(params, indent=2), status=200)
-
-
-@api_view(['GET'])
-@payment.required(100)
-def twitter_search(request):
-    """
-    Input: Twitter username
-    Output: JSON-encoded demographic and social network profiles of Twitter username.
-    """
-    username = request.GET.get('username')
-    response = requests.get(
-        'https://api.fullcontact.com/v2/person.json?twitter=' + username + '&apiKey=' + FULLCONTACT_API)
-    response = response.json()
-
-    try:
-        params = {
-            'user_info': {
-                'demographics': response['demographics'],
-                'social_profiles': response['socialProfiles']
-            }
-        }
-        return HttpResponse(json.dumps(params, indent=2), status=200)
-    except:
-        params = {"Exception Error": "It appears something broke in the code."}
-        return HttpResponse(json.dumps(params, indent=2), status=200)
 
 
 @api_view(['GET'])
