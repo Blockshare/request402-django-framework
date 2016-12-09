@@ -178,7 +178,7 @@ def get(request):
     http_encoding = request.META.get('HTTP_ACCEPT_ENCODING')
     http_user_agent = request.META.get('HTTP_USER_AGENT')
     http_host = request.META.get('HTTP_HOST')
-    http_server = request.META.get('HTTP_X_FORWARDED_SERVER')
+    http_connect = request.META.get('HTTP_CONNECTION')    
 
     try:
         origin = x_forwarded_for.split(',')[0]
@@ -186,14 +186,14 @@ def get(request):
         encoding = http_encoding.split(',')[0]
         agent = http_user_agent.split(',')[0]
         host = http_host.split(',')[0]
-        server = http_server.split(',')[0]
+        connect = http_connect.split(',')[0]
         response = {
             'headers': {
                 'Accept': accept,
                 'Encoding': encoding,
                 'User-Agent': agent,
                 'HTTP-Host': host,
-                'Connection': server, 
+                'Connection': connect,
             },
             'origin': origin
         }
