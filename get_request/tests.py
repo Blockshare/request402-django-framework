@@ -3,6 +3,9 @@ This file demonstrates writing tests using the unittest module. These will pass
 when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
+
+All of these work with the two1 library to make sure that each endpoint passes.
+
 """
 
 import mock
