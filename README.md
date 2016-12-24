@@ -7,7 +7,7 @@ HTTP(S) Request & Response API for your Digital Assets.
 
 Easily access JSON output with Bitcoin Micropayments.
 
-All endpoints cost 5 - 2500 satoshis | $0.00003 - $0.01572
+All endpoints cost 5 - 2500 satoshis
 
 Full documentation can be found at https://www.request402.com
 A quick reference text can be found by running https://www.request402.com/info
