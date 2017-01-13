@@ -9,4 +9,4 @@ hashids==1.1.0
 mock==2.0.0
 psycopg2==2.6.1
 pyopenssl==16.1.0
-two1==3.10.3
+two1==3.10.4
