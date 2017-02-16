@@ -28,7 +28,7 @@ if os.path.isfile(dotenv_file):
 
 TWO1_WALLET_MNEMONIC = os.environ.get("TWO1_WALLET_MNEMONIC")
 TWO1_USERNAME = os.environ.get("TWO1_USERNAME")
-#WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
+WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
 #USERNAME = Config().username
 #BIT_REQUESTS = BitTransferRequests(WALLET, USERNAME)
 
