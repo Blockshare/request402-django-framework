@@ -1,19 +1,4 @@
-"""
-Copyright Blockshare Technologies, LLC.
-  ____  _            _     ____  _                      ___ ___  
- | __ )| | ___   ___| | __/ ___|| |__   __ _ _ __ ___  |_ _/ _ \ 
- |  _ \| |/ _ \ / __| |/ /\___ \| '_ \ / _` | '__/ _ \  | | | | |
- | |_) | | (_) | (__|   <  ___) | | | | (_| | | |  __/_ | | |_| |
- |____/|_|\___/ \___|_|\_\|____/|_| |_|\__,_|_|  \___(_)___\___/ 
-
-
-"""
-
-__author__ = "cponeill"
-__version__ = "1.0"
-__maintainer__ = "cponeill"
-__email__ = "cponeill@blockshare.io"
-
+#! /usr/bin/env python3
 import ssl
 import socket
 import json
