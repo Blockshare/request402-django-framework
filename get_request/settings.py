@@ -63,11 +63,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'opbeat.contrib.django',
     'get_request',
     'two1.bitserv.django',
 )
 
+OPBEAT = {
+    'ORGANIZATION_ID': '36a0c57b50f3451fa5d87033d9ed320c',
+    'APP_ID': '21ff4b6ca7',
+    'SECRET_TOKEN': 'f04e8ac4dd414c16b57dd667f0275010ff3b892d',
+}
+
 MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
