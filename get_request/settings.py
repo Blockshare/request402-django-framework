@@ -33,11 +33,6 @@ WALLET = Two1Wallet.import_from_mnemonic(mnemonic=TWO1_WALLET_MNEMONIC)
 MASHAPE = os.environ.get("MASHAPE")
 JSONWHOIS = os.environ.get('JSONWHOIS')
 
-# load opbeat configuration code for app monitoring.
-ORG_ID = os.environ.get("ORG_ID")
-APP_ID = os.environ.get("APP_ID")
-TOKEN = os.environ.get("TOKEN")
-
 # load database from the DATABASE_URL environment variable
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
@@ -75,11 +70,6 @@ INSTALLED_APPS = (
     'two1.bitserv.django',
 )
 
-OPBEAT = {
-    'ORGANIZATION_ID': ORG_ID,
-    'APP_ID':  APP_ID,
-    'SECRET_TOKEN': TOKEN,
-}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
