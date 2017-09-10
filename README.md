@@ -18,3 +18,6 @@ A quick reference text can be found by running https://www.request402.com/info
 1. A  <a href="https://21.co">21 Bitcoin Computer</a> or the 21 free client and Python 3 installed.
 2. You will need to be connected the 21 Zerotier Marketplace.
 3. Make sure you have mined or have enough satoshi in your wallet for transactions.
+
+
+Please get in touch with me if you have any questions about the code. You can find me on Twitter @cponeill
