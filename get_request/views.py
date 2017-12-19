@@ -10,7 +10,6 @@ from django.shortcuts import render
 from django.http import StreamingHttpResponse
 
 from rest_framework.decorators import api_view
-from two1.bitserv.django import payment
 from xml.etree import ElementTree
 from get_request.settings import MASHAPE
 from get_request.settings import JSONWHOIS
@@ -69,7 +68,7 @@ def get_alexa_xml(request):
 
 
 @api_view(['GET'])
-@payment.required(1000)
+#@payment.required(1000)
 def get_status(request):
     """
     Input: Domain name URL.
@@ -108,7 +107,7 @@ def get_status(request):
 
 
 @api_view(['GET'])
-@payment.required(250)
+#@payment.required(250)
 def get_ip(request):
     """
     Input: Domain name URL.
@@ -149,7 +148,7 @@ def ip(request):
 
 
 @api_view(['GET'])
-@payment.required(5)
+#@payment.required(5)
 def get(request):
     """
     Input: Run API URL in command line or call it via client script.
@@ -190,7 +189,7 @@ def get(request):
 
 
 @api_view(['GET'])
-@payment.required(5)
+#@payment.required(5)
 def server_info(request):
     """
     Input: Domain name URL.
@@ -225,7 +224,7 @@ def server_info(request):
 
 
 @api_view(['GET'])
-@payment.required(1000)
+#@payment.required(1000)
 def get_ssl(request):
     """
     Input: TLS/SSL certified URL.
@@ -242,7 +241,7 @@ def get_ssl(request):
 
 
 @api_view(['GET'])
-@payment.required(2500)
+#@payment.required(2500)
 def get_ssl_source(request):
     """
     Input: TLS/SSL certified URL.
@@ -276,7 +275,7 @@ def get_ssl_source(request):
 
 
 @api_view(['GET'])
-@payment.required(1000)
+#@payment.required(1000)
 def get_blacklist(request):
     """
     Input: Domain URL.
@@ -295,7 +294,7 @@ def get_blacklist(request):
 
 
 @api_view(['GET'])
-@payment.required(750)
+#@payment.required(750)
 def get_rank(request):
     """
     Input: Specific URL.
@@ -321,7 +320,7 @@ def get_rank(request):
 
 
 @api_view(['GET'])
-@payment.required(1000)
+#@payment.required(1000)
 def domain_search(request):
     """
     Input: Domain name / URL.
@@ -350,7 +349,7 @@ def domain_search(request):
 
 
 @api_view(['GET'])
-@payment.required(1000)
+#@payment.required(1000)
 def domain_social(request):
     """
     Input: Domain URL.
@@ -369,7 +368,7 @@ def domain_social(request):
 
 
 @api_view(['GET'])
-@payment.required(2500)
+#@payment.required(2500)
 def domain_screenshot(request):
     """
     Input: Domain URL.
